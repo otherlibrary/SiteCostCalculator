@@ -1,0 +1,1 @@
+[18-Feb-2011 05:50:28] PHP Fatal error:  Call to undefined function  _unescapeutf8escapeseq() in /home/vokacost/public_html/tr/example.php on line 78

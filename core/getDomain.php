@@ -1,0 +1,1 @@
+<?phpinclude("config.php");$id = $_GET['id'];$sql = "SELECT * FROM worth WHERE id = '$id' LIMIT 1";$rs_result = mysql_query ($sql);while ($row = mysql_fetch_assoc($rs_result)) {	$domain = $row[domain];	echo $domain;}mysql_close($con);?>

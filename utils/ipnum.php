@@ -1,0 +1,1 @@
+<?include("config.php");$ip_num = sprintf("%u", ip2long($_SERVER['REMOTE_ADDR']));$sql = "SELECT cc FROM geo_csv WHERE $ip_num BETWEEN start AND end;";$rs_result = mysql_query ($sql); while ($row = mysql_fetch_assoc($rs_result)) { 	$cc = $row[cc];}mysql_close($con);echo $cc;?>

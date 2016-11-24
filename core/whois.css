@@ -1,0 +1,1 @@
+.mainAreaInternal {    position: absolute;    overflow: auto;    padding: 2px;    z-index: 0;}.mainAreaLoading {    position: absolute;    width: 200px;    height: 50px;    z-index: 1;}

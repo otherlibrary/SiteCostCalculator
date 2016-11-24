@@ -1,0 +1,99 @@
+[10-Feb-2011 05:37:29] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:37:29] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:37:29] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:37:29] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:37:29] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:37:29] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:37:29] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:37:29] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:37:29] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:37:29] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:37:29] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:37:29] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:37:29] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:37:29] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:37:29] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:37:29] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:37:30] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:37:30] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:37:30] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:37:30] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:37:30] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:37:30] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:37:30] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:37:30] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:39:17] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:39:17] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:39:17] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:39:17] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:39:17] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:39:17] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:39:17] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:39:17] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:39:20] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:39:20] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:39:20] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:39:20] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:39:20] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:39:20] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:39:20] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:39:20] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:39:20] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:39:20] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:39:20] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:39:20] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:39:20] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:39:20] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:39:20] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:39:20] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:39:21] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:39:21] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:39:21] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:39:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:39:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:39:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:39:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:39:21] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:40:21] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:40:21] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:40:21] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:40:21] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:40:21] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:40:21] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:40:21] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:40:21] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[10-Feb-2011 05:40:21] PHP Warning:  imagecreatefrompng(primg.png) [<a href='function.imagecreatefrompng'>function.imagecreatefrompng</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/primg.php on line 18
+[10-Feb-2011 05:40:21] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 35
+[10-Feb-2011 05:40:21] PHP Warning:  imagecolorallocate(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 36
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 37
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 38
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 39
+[10-Feb-2011 05:40:21] PHP Warning:  imagestring(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 40
+[10-Feb-2011 05:40:21] PHP Warning:  imagepng(): supplied argument is not a valid Image resource in /home/vokacost/public_html/c_images/primg.php on line 41
+[18-Feb-2011 06:27:33] PHP Parse error:  syntax error, unexpected T_LNUMBER in /home/vokacost/public_html/c_images/testimg.php on line 27
+[18-Feb-2011 06:29:16] PHP Parse error:  syntax error, unexpected T_LNUMBER in /home/vokacost/public_html/c_images/testimg.php on line 27
+[18-Feb-2011 06:29:19] PHP Parse error:  syntax error, unexpected T_LNUMBER in /home/vokacost/public_html/c_images/testimg.php on line 27
+[18-Feb-2011 06:29:28] PHP Parse error:  syntax error, unexpected T_LNUMBER in /home/vokacost/public_html/c_images/testimg.php on line 27
+[18-Feb-2011 06:29:29] PHP Parse error:  syntax error, unexpected T_LNUMBER in /home/vokacost/public_html/c_images/testimg.php on line 27
+[18-Feb-2011 06:30:20] PHP Parse error:  syntax error, unexpected T_LNUMBER in /home/vokacost/public_html/c_images/testimg.php on line 27
+[18-Feb-2011 06:34:43] PHP Fatal error:  Call to undefined function  decode() in /home/vokacost/public_html/c_images/testimg.php on line 45
+[18-Feb-2011 06:34:43] PHP Fatal error:  Call to undefined function  decode() in /home/vokacost/public_html/c_images/testimg.php on line 45
+[18-Feb-2011 06:34:43] PHP Fatal error:  Call to undefined function  decode() in /home/vokacost/public_html/c_images/testimg.php on line 45
+[18-Feb-2011 06:36:29] PHP Fatal error:  Call to undefined function  decode() in /home/vokacost/public_html/c_images/testimg.php on line 36
+[18-Feb-2011 06:36:29] PHP Fatal error:  Call to undefined function  decode() in /home/vokacost/public_html/c_images/testimg.php on line 36
+[18-Feb-2011 06:36:30] PHP Fatal error:  Call to undefined function  decode() in /home/vokacost/public_html/c_images/testimg.php on line 36
+[18-Feb-2011 07:59:25] PHP Fatal error:  Cannot pass parameter 1 by reference in /home/vokacost/public_html/c_images/ent.php on line 3
+[18-Feb-2011 07:59:59] PHP Warning:  require(utf8.inc) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/ent.php on line 2
+[18-Feb-2011 07:59:59] PHP Warning:  require(utf8.inc) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/c_images/ent.php on line 2
+[18-Feb-2011 07:59:59] PHP Fatal error:  require() [<a href='function.require'>function.require</a>]: Failed opening required 'utf8.inc' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/vokacost/public_html/c_images/ent.php on line 2
+[18-Feb-2011 08:01:05] PHP Fatal error:  Only variables can be passed by reference in /home/vokacost/public_html/c_images/ent.php on line 113
+[18-Feb-2011 08:09:25] PHP Parse error:  syntax error, unexpected ')', expecting '&' or T_VARIABLE in /home/vokacost/public_html/c_images/ent.php on line 2
+[18-Feb-2011 08:10:03] PHP Parse error:  syntax error, unexpected T_VAR in /home/vokacost/public_html/c_images/ent.php on line 3

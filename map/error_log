@@ -1,0 +1,7 @@
+[07-Mar-2011 06:25:29] PHP Parse error:  syntax error, unexpected '>' in /home/vokacost/public_html/map/namesMap.php on line 31
+[12-Mar-2011 07:33:19] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ',' or ';' in /home/vokacost/public_html/map/namesMap.php on line 45
+[12-Mar-2011 07:33:19] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ',' or ';' in /home/vokacost/public_html/map/namesMap.php on line 45
+[15-Mar-2011 17:30:23] PHP Parse error:  syntax error, unexpected '{' in /home/vokacost/public_html/map/index.php on line 30
+[15-Mar-2011 17:30:41] PHP Parse error:  syntax error, unexpected '{' in /home/vokacost/public_html/map/index.php on line 30
+[18-Mar-2011 06:49:25] PHP Warning:  fopen(GeoIP.dat) [<a href='function.fopen'>function.fopen</a>]: failed to open stream: No such file or directory in /home/vokacost/public_html/map/geoip.inc on line 314
+[18-Mar-2011 06:51:11] PHP Fatal error:  Call to undefined function  get_ip() in /home/vokacost/public_html/map/index.php on line 22

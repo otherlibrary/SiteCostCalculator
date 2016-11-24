@@ -1,0 +1,4 @@
+[07-Feb-2011 14:20:45] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: YES) in /home/vokacost/public_html/config.php on line 9
+[07-Feb-2011 14:20:45] PHP Warning:  mysql_select_db(): supplied argument is not a valid MySQL-Link resource in /home/vokacost/public_html/config.php on line 10
+[07-Feb-2011 14:20:45] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: YES) in /home/vokacost/public_html/config.php on line 9
+[07-Feb-2011 14:20:45] PHP Warning:  mysql_select_db(): supplied argument is not a valid MySQL-Link resource in /home/vokacost/public_html/config.php on line 10

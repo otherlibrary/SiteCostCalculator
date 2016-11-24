@@ -1,0 +1,19 @@
+[18-Feb-2011 09:13:43] PHP Parse error:  syntax error, unexpected '/' in /home/vokacost/public_html/widgets/worthWidget.php on line 20
+[18-Feb-2011 15:48:05] PHP Parse error:  syntax error, unexpected T_STRING in /home/vokacost/public_html/widgets/prWidget.php on line 16
+[18-Feb-2011 15:48:07] PHP Parse error:  syntax error, unexpected T_STRING in /home/vokacost/public_html/widgets/prWidget.php on line 16
+[18-Feb-2011 15:48:33] PHP Parse error:  syntax error, unexpected T_STRING in /home/vokacost/public_html/widgets/prWidget.php on line 16
+[20-Feb-2011 09:58:45] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 83
+[20-Feb-2011 09:58:46] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 83
+[20-Feb-2011 09:59:37] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 83
+[20-Feb-2011 09:59:39] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 83
+[20-Feb-2011 10:00:02] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 85
+[20-Feb-2011 10:02:35] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 83
+[20-Feb-2011 10:02:55] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 83
+[20-Feb-2011 10:03:28] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 83
+[20-Feb-2011 10:03:53] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/vokacost/public_html/widgets/allWidget.php on line 83
+[10-Nov-2012 11:27:09] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2) in /home/vladkish/public_html/widgets/config.php on line 8
+[10-Nov-2012 11:27:09] PHP Warning:  mysql_select_db(): supplied argument is not a valid MySQL-Link resource in /home/vladkish/public_html/widgets/config.php on line 9
+[10-Nov-2012 11:27:09] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2) in /home/vladkish/public_html/widgets/allWidget.php on line 23
+[10-Nov-2012 11:27:09] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/vladkish/public_html/widgets/allWidget.php on line 23
+[10-Nov-2012 11:27:09] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home/vladkish/public_html/widgets/allWidget.php on line 24
+[10-Nov-2012 11:27:09] PHP Warning:  mysql_close(): supplied argument is not a valid MySQL-Link resource in /home/vladkish/public_html/widgets/allWidget.php on line 71

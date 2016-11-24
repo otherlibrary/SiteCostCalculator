@@ -1,0 +1,1 @@
+<?include("config.php");$domain = $_GET['domain'];list($tld, $zone) = split('\.', $domain);$sql = "SELECT domain FROM worth WHERE domain like '%$tld%'";$rs_result = mysql_query ($sql);$res = "";while ($row = mysql_fetch_assoc($rs_result)) {	$domain = $row[domain];	$res = $res.$domain."<br>";}mysql_close($con);echo $res;?>
