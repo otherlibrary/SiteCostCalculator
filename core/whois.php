@@ -1,4 +1,4 @@
-﻿<?
+<?
 $ip = $_POST['content'];
 include "whois/upk1.php";
 $domain = $ip;

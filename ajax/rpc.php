@@ -1,3 +1,3 @@
-<?php
-include("whois.php");
+<?php
+include("whois.php");
 ?>

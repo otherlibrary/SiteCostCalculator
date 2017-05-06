@@ -1,1 +1,1 @@
-﻿<?phpinclude("config.php");$cDate = date('Y-m-d H:i:s');$sql = "UPDATE worth SET worth.cDate = '".mysql_real_escape_string($cDate)."' WHERE domain = 'kishlaly.com'";$rs_result = mysql_query($sql);mysql_close($con);echo $rs_result;?>
+<?phpinclude("config.php");$cDate = date('Y-m-d H:i:s');$sql = "UPDATE worth SET worth.cDate = '".mysql_real_escape_string($cDate)."' WHERE domain = 'kishlaly.com'";$rs_result = mysql_query($sql);mysql_close($con);echo $rs_result;?>

@@ -1,4 +1,4 @@
-﻿<?
+<?
 include ("config.php");
 echo mysql_query ("UPDATE worth SET title =  '".mysql_real_escape_string("Watch Movies Online free  Watch online Hindi Indian Dubbed Movies")."' WHERE domain ='thebolly.com' LIMIT 1")."<br>";
 echo mysql_query ("UPDATE worth SET title = '".mysql_real_escape_string("Oracle and Sun")."' WHERE domain ='sun.com' LIMIT 1")."<br>";

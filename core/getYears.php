@@ -1,6 +1,6 @@
-<?
-
-list($years, $yearsStr, $days, $daysStr) = split(' ', 'Undefined');
-echo $years;
-
+<?
+
+list($years, $yearsStr, $days, $daysStr) = split(' ', 'Undefined');
+echo $years;
+
 ?>

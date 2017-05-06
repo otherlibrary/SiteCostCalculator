@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang = $_GET['lang'];
 if ($mainTitle2 == 'SiteCostCalculator.ru') {
 	$lang = 'ru';

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
  class cache
 {
     var $cache_dir = './cache/';//This is the directory where the cache files will be stored;

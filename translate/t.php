@@ -1,5 +1,5 @@
-<?
-
-echo $_GET['domain'];
-
+<?
+
+echo $_GET['domain'];
+
 ?>

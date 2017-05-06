@@ -1,5 +1,5 @@
-<?
-
-echo "Cloud";
-
+<?
+
+echo "Cloud";
+
 ?>

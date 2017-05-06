@@ -1,4 +1,4 @@
-﻿<?
+<?
 $userAgent = $_SERVER['HTTP_USER_AGENT'];
 $serferIp = $_SERVER['REMOTE_ADDR'];
 //$serferIp = "72.113.33.44";
