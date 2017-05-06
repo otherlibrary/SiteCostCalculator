@@ -182,7 +182,7 @@ $keys_ = ($keysD) ? $keysD : $customKey;
   _gaq.push(['_trackPageLoadTime']);
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
@@ -190,11 +190,9 @@ $keys_ = ($keysD) ? $keysD : $customKey;
 //--> </script>
 <style type="text/css">
 
-.sprites { 
-    background-image     : url(csg-4ee23434bf328.png);
-    background-color     : transparent; 
-    background-repeat    : no-repeat; 
- } 
+.sprites {
+    background: transparent url(csg-4ee23434bf328.png) no-repeat;
+}
  
  #blogger_gif { 
     height               : 16px; 
@@ -407,7 +405,7 @@ var _qevents = _qevents || [];
 
 (function() {
 var elem = document.createElement('script');
-elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.src = (document.location.protocol === "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
 elem.async = true;
 elem.type = "text/javascript";
 var scpt = document.getElementsByTagName('script')[0];
@@ -435,7 +433,7 @@ qacct:"p-77YFQ0Mm3_8F2"
 <center>
 <div style="width:1280px;position:relative;">
 	<div id='lastCalculated' style="width:313px;height:440px;position:absolute;top:0;left:0;">
-		<span id="lastTitle"><b><? echo $f7; ?></b></span>
+		<span id="lastTitle" style="font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold;"><b><? echo $f7; ?></b></span>
 	</div>	
 	<div style="width:645px;">
 <?
@@ -536,7 +534,7 @@ $langStrRu = "<div class=\"sprites\" id=\"ru_png\"></div>";
 	<div id="total"></div><br>
 	<input type="text" class="rc10" name="url" id="url"
 		   style="margin-left:10px;margin-right:10px;width: 367px; height: 25px; background-color: rgb(230, 230, 221); border: 1px solid #b4b4b4; font-family: georgia, serif; color: #2a2a2a; font-size:14pt; color: #555555; text-align: center;"
-		   onKeyPress="if (event.keyCode==13) { getAll2(); }" />
+		   onKeyPress="if (event.keyCode===13) { getAll2(); }" />
 		   <br><input type="button" value="<? echo $f12; ?>" style="height:25px;" onclick="getAll2();"><br><br>
 <center>
 <a href="https://addons.mozilla.org/ru/firefox/addon/site-cost-calculator-tool/" target="_blank"><img src="images/firefox.png" class="nob" BORDER=0 title="<? echo $ff__; ?>"></a>&nbsp;
@@ -565,7 +563,7 @@ echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 ?></center>
 
 	<div id="sortable" style="width:313px;height:440px;position:absolute;top:0;right:0;"><center>
-			<span id="stitle"><b><? echo $f16; ?></b></span><br>
+			<span id="stitle" style="font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold;"><b><? echo $f16; ?></b></span><br>
 		</center></div><br>
 </div>
 <?
