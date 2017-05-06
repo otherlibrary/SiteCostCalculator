@@ -1,6 +1,5 @@
 <?
 $dobattle_ = $_GET['dobattle'];
-
 function curPageURL() {
  $pageURL = 'http';
  if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -12,18 +11,14 @@ function curPageURL() {
  }
  return $pageURL;
 }
-
 preg_match("/^(http:\/\/)?([^\/]+)/i", curPageURL(), $matches);
 $host = $matches[2];
 preg_match("/[^\.\/]+\.[^\.\/]+$/", $host, $matches);
-
 $mainDomain = "{$matches[0]}";
 $newRu = str_replace ($mainDomain, "sitecostcalculator.ru", curPageURL());
 $newEn = str_replace ($mainDomain, "sitecostcalculator.com", curPageURL());
 $mainTitle1 = "";
 $mainTitle2 = "";
-
-
 if ($mainDomain == 'sitecostcalculator.com') {
 	$mainTitle1 = 'Site Cost Calculator';
 	$mainTitle1_ = 'Site Cost Calculator 2.4';
@@ -74,7 +69,6 @@ if ($mainDomain == 'costofwebsite.net') {
 	$homePage = "http://costofwebsite.net";
 	$logo = "<div id='logo'><a href='$homePage'><font style='font-family: georgia, serif; font-size:24pt;'>".$mainTitle1."</font></a><br><br></div>";
 }
-
 if ($mainDomain == 'sitecostcalculator.ru') {
 	$mainTitle2 = 'SiteCostCalculator.ru';
 	$homePage = "http://sitecostcalculator.ru";
@@ -111,9 +105,7 @@ include("config.php");
 $d = $_GET['d'];
 $fs = $_GET['fs'];
 $fsh = $_GET['fsh'];
-
 if ($d) {
-
 $sql = "SELECT worth, sccCost FROM worth WHERE domain = '$d' LIMIT 1";
 $rs_result = mysql_query ($sql);
 while ($row = mysql_fetch_assoc($rs_result)) {
@@ -145,18 +137,14 @@ if ($fsh) {
 	} else {
 $battleshow = $_GET['battle'];
 		if ($dobattle_ || $battleshow) {
-
 $splitted = explode(',', $dobattle_);
 $filtered = array_unique($splitted);
-
 foreach ($filtered as $key => $link) {
     if (strlen($filtered[$key]) < 4 || (strrpos($filtered[$key], ".") === false)) {
         unset($filtered[$key]);
     }
 }
-
 $tA = str_replace("," , " VS ", implode(',', $filtered));
-
 			$titleOut = $mainTitle1." - ".$nBattle." ".$tA;
 		} else {
 			$titleOut = $mainTitle1." - ".$n102;
@@ -189,7 +177,6 @@ $keys_ = ($keysD) ? $keysD : $customKey;
 <script type="text/javascript" src="js/prototype.js"> <!--
 //--> </script>
 <style type="text/css">
-
 .sprites {
     background: transparent url(csg-4ee23434bf328.png) no-repeat;
 }
@@ -325,7 +312,6 @@ $keys_ = ($keysD) ? $keysD : $customKey;
     width                : 16px; 
     background-position  : 0 -1818px;
  } 
-
 table.cool {
 border-collapse:collapse;
 background:#EFF4FB url(teaser.gif) repeat-x;
@@ -402,7 +388,6 @@ background:#fafafa
 <!-- Quantcast Tag -->
 <script type="text/javascript">
 var _qevents = _qevents || [];
-
 (function() {
 var elem = document.createElement('script');
 elem.src = (document.location.protocol === "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
@@ -411,12 +396,10 @@ elem.type = "text/javascript";
 var scpt = document.getElementsByTagName('script')[0];
 scpt.parentNode.insertBefore(elem, scpt);
 })();
-
 _qevents.push({
 qacct:"p-77YFQ0Mm3_8F2"
 });
 </script>
-
 <noscript>
 <div style="display:none;">
 <img src="//pixel.quantserve.com/pixel/p-77YFQ0Mm3_8F2.gif" border="0" height="1" width="1" alt="Quantcast"/>
@@ -459,7 +442,6 @@ $langStrRu = "<div class=\"sprites\" id=\"ru_png\"></div>";
 		  }
 		});	
  	}
-
 	function fight(data) {
 		document.getElementById('res').innerHTML = "<center><img src='a.gif'></center>";
 		new Ajax.Request('fight.php?lang=<? echo $lang; ?>&data=' + data, {
@@ -470,8 +452,6 @@ $langStrRu = "<div class=\"sprites\" id=\"ru_png\"></div>";
 		  }
 		});	
  	}
-
-
 	function getBattle() {
 		document.getElementById('res').innerHTML = "<center><img src='a.gif'></center>";
 		new Ajax.Request('battle.php?lang=<? echo $lang; ?>', {
@@ -482,7 +462,6 @@ $langStrRu = "<div class=\"sprites\" id=\"ru_png\"></div>";
 		  }
 		});	
  	}
-
 	function loadComments(domain) {
 	      document.getElementById('commbody').style.height = "30px";
 	      document.getElementById('commbody').innerHTML = "<center><img src='a.gif'></center>";
@@ -494,8 +473,6 @@ $langStrRu = "<div class=\"sprites\" id=\"ru_png\"></div>";
 		  }
 		});	
  	}
-
-
 	function addComment(domain) {
 		var cName = Url.encode(document.getElementById('commentname').value.replace(/^\s+|\s+$/g,""));
 		var cComm = Url.encode(document.getElementById('commenttext').value.replace(/^\s+|\s+$/g,""));
@@ -516,12 +493,9 @@ $langStrRu = "<div class=\"sprites\" id=\"ru_png\"></div>";
 		  }
 		});	
  	}
-
-
 	function doBattle(data) {
 		window.location = "<? echo $homePage; ?>/battle:" + data.replace(/\n/g, ',');
 	}
-
 </script>
 <script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
 </td>
@@ -539,15 +513,12 @@ $langStrRu = "<div class=\"sprites\" id=\"ru_png\"></div>";
 <center>
 <a href="https://addons.mozilla.org/ru/firefox/addon/site-cost-calculator-tool/" target="_blank"><img src="images/firefox.png" class="nob" BORDER=0 title="<? echo $ff__; ?>"></a>&nbsp;
 <a href="https://chrome.google.com/webstore/detail/lckfdajgjbgkegjkobheebfkheadbikl" target="_blank"><img src="images/chrome.png" class="nob" BORDER=0 title="<? echo $ch__; ?>"></a><br>
-
 <br><br>
 <font style='font-family: georgia, serif; font-size:12pt;'>
 Proudly present my new project:</font><br>
 <font style='font-family: georgia, serif; font-size:15pt;'><a href="http://simpleamazonsearch.com/" target="_blank">Simple Amazon Search</a></font><br>
 <font style='font-family: georgia, serif; font-size:12pt;'>Quick search for the best offers from thousands, without tedous filtering</font><br>
 <font style='font-family: georgia, serif; font-size:12pt;'>Get only what you've searched for</font>
-
-
 <?
 //echo $out;
 //echo"<br><br><font style='font-family: georgia, serif; font-size:14pt; color:red;'>".$help1_."</font><br><font style='font-family: georgia, serif; font-size:12pt;'><a onclick='help();' style='cursor: pointer; color: blue; text-decoration:underline;'>".$help2_."</a></font><br><br><br><br>";
@@ -561,7 +532,6 @@ echo "<font style='font-family: georgia, serif; font-size:15pt; color:green;'><b
 echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 }
 ?></center>
-
 	<div id="sortable" style="width:313px;height:440px;position:absolute;top:0;right:0;"><center>
 			<span id="stitle" style="font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold;"><b><? echo $f16; ?></b></span><br>
 		</center></div><br>
@@ -628,24 +598,14 @@ if ($key3) {
 <div id="res" style="width:1150px;position:relative;"><center>
 </div>
 <br>
-
 <center>
-
 <br><br><br><div style="width:1000px;">
-
 <hr>
-
 <font style='font-family: georgia, serif; font-size:11pt;'><? echo $ps; ?></font>
-
 </div>
-
 <br><br>
-
 &copy;&nbsp;2010-2013&nbsp;<a href="http://kishlaly.com" target="_blank">Vladimir Kishlaly</a>
-
 </center>
-
-
 <?
 $d = $_GET['d'];
 if ($d) {

@@ -6,7 +6,6 @@
  * @author Matthias Sommerfeld, <mso@phlylabs.de>
  * @version 0.1.0
  */
-
 /**
  * Convert a string from any of various encodings to UTF-8
  *
@@ -42,7 +41,6 @@ function encode_utf8($string = '', $encoding = 'iso-8859-1', $safe_mode = false)
     }
     return $safe;
 }
-
 /**
  * Convert a string from UTF-8 to any of various encodings
  *
@@ -79,7 +77,6 @@ function decode_utf8($string = '', $encoding = 'iso-8859-1', $safe_mode = false)
     }
     return $safe;
 }
-
 /**
  * Special treatment for our guys in Redmond
  * Windows-1252 is basically ISO-8859-1 -- with some exceptions, which get accounted for here
@@ -122,7 +119,6 @@ function map_w1252_iso8859_1($string = '')
     }
     return $return;
 }
-
 /**
  * Special treatment for our guys in Redmond
  * Windows-1252 is basically ISO-8859-1 -- with some exceptions, which get accounted for here
@@ -165,5 +161,4 @@ function map_iso8859_1_w1252($string = '')
     }
     return $return;
 }
-
 ?>
