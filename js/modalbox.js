@@ -98,7 +98,7 @@ Modalbox.Methods = {
 			$(this.MBcaption).hide();
 		}
 		
-		if(this.MBwindow.style.display == "none") { // First modal box appearing
+		if(this.MBwindow.style.display === "none") { // First modal box appearing
 			this._appear();
 			this.event("onShow"); // Passing onShow callback
 		}
@@ -111,7 +111,7 @@ Modalbox.Methods = {
 	hide: function(options) { // External hide method to use from external HTML and JS
 		if(this.initialized) {
 			// Reading for options/callbacks except if event given as a pararmeter
-			if(options && typeof options.element != 'function') Object.extend(this.options, options); 
+			if(options && typeof options.element !== 'function') Object.extend(this.options, options);
 			// Passing beforeHide callback
 			this.event("beforeHide");
 			if(this.options.transitions)
@@ -126,7 +126,7 @@ Modalbox.Methods = {
 	_hide: function(event) { // Internal hide method to use with overlay and close link
 		event.stop(); // Stop event propaganation for link elements
 		/* Then clicked on overlay we'll check the option and in case of overlayClose == false we'll break hiding execution [Fix for #139] */
-		if(event.element().id == 'MB_overlay' && !this.options.overlayClose) return false;
+		if(event.element().id === 'MB_overlay' && !this.options.overlayClose) return false;
 		this.hide();
 	},
 	
@@ -201,7 +201,7 @@ Modalbox.Methods = {
 		// This might be useful to resize modalbox after some content modifications which were changed ccontent height.
 		
 		var byHeight = this.options.height - this.MBwindow.offsetHeight;
-		if(byHeight != 0) {
+		if(byHeight !== 0) {
 			if(options) this.setOptions(options); // Passing callbacks
 			Modalbox.resize(0, byHeight);
 		}
@@ -229,8 +229,8 @@ Modalbox.Methods = {
 	},
 	
 	loadContent: function () {
-		if(this.event("beforeLoad") != false) { // If callback passed false, skip loading of the content
-			if(typeof this.content == 'string') {
+		if(this.event("beforeLoad") !== false) { // If callback passed false, skip loading of the content
+			if(typeof this.content === 'string') {
 				var htmlRegExp = new RegExp(/<\/?[^>]+>/gi);
 				if(htmlRegExp.test(this.content)) { // Plain HTML given as a parameter
 					this._insertContent(this.content.stripScripts());
@@ -256,7 +256,7 @@ Modalbox.Methods = {
 						}
 					});
 					
-			} else if (typeof this.content == 'object') {// HTML Object is given
+			} else if (typeof this.content === 'object') {// HTML Object is given
 				this._insertContent(this.content);
 				this._putContent();
 			} else {
@@ -268,11 +268,11 @@ Modalbox.Methods = {
 	
 	_insertContent: function(content){
 		$(this.MBcontent).hide().update("");
-		if(typeof content == 'string') {
+		if(typeof content === 'string') {
 			setTimeout(function() { // Hack to disable content flickering in Firefox
 				this.MBcontent.update(content);
 			}.bind(this), 1);
-		} else if (typeof content == 'object') { // HTML Object is given
+		} else if (typeof content === 'object') { // HTML Object is given
 			var _htmlObj = content.cloneNode(true); // If node already a part of DOM we'll clone it
 			// If clonable element has ID attribute defined, modifying it to prevent duplicates
 			if(content.id) content.id = "MB_" + content.id;
@@ -287,7 +287,7 @@ Modalbox.Methods = {
 	
 	_putContent: function(callback){
 		// Prepare and resize modal box for content
-		if(this.options.height == this._options.height) {
+		if(this.options.height === this._options.height) {
 			setTimeout(function() { // MSIE sometimes doesn't display content correctly
 				Modalbox.resize(0, $(this.MBcontent).getHeight() - $(this.MBwindow).getHeight() + $(this.MBheader).getHeight(), {
 					afterResize: function(){
@@ -295,7 +295,7 @@ Modalbox.Methods = {
 						this.focusableElements = this._findFocusableElements();
 						this._setFocus(); // Setting focus on first 'focusable' element in content (input, select, textarea, link or button)
 						setTimeout(function(){ // MSIE fix
-							if(callback != undefined)
+							if(callback !== undefined)
 								callback(); // Executing internal JS from loaded content
 							this.event("afterLoad"); // Passing callback
 						}.bind(this),1);
@@ -309,7 +309,7 @@ Modalbox.Methods = {
 			this.focusableElements = this._findFocusableElements();
 			this._setFocus(); // Setting focus on first 'focusable' element in content (input, select, textarea, link or button)
 			setTimeout(function(){ // MSIE fix
-				if(callback != undefined)
+				if(callback !== undefined)
 					callback(); // Executing internal JS from loaded content
 				this.event("afterLoad"); // Passing callback
 			}.bind(this),1);
@@ -366,9 +366,9 @@ Modalbox.Methods = {
 	
 	_setFocus: function() { 
 		/* Setting focus to the first 'focusable' element which is one with tabindex = 1 or the first in the form loaded. */
-		if(this.focusableElements.length > 0 && this.options.autoFocusing == true) {
+		if(this.focusableElements.length > 0 && this.options.autoFocusing === true) {
 			var firstEl = this.focusableElements.find(function (el){
-				return el.tabIndex == 1;
+				return el.tabIndex === 1;
 			}) || this.focusableElements.first();
 			this.currFocused = this.focusableElements.toArray().indexOf(firstEl);
 			firstEl.focus(); // Focus on first focusable element except close button
@@ -388,11 +388,11 @@ Modalbox.Methods = {
 				event.stop();
 				
 				/* Switching currFocused to the element which was focused by mouse instead of TAB-key. Fix for #134 */ 
-				if(node != this.focusableElements[this.currFocused])
+				if(node !== this.focusableElements[this.currFocused])
 					this.currFocused = this.focusableElements.toArray().indexOf(node);
 				
 				if(!event.shiftKey) { //Focusing in direct order
-					if(this.currFocused == this.focusableElements.length - 1) {
+					if(this.currFocused === this.focusableElements.length - 1) {
 						this.focusableElements.first().focus();
 						this.currFocused = 0;
 					} else {
@@ -400,7 +400,7 @@ Modalbox.Methods = {
 						this.focusableElements[this.currFocused].focus();
 					}
 				} else { // Shift key is pressed. Focusing in reverse order
-					if(this.currFocused == 0) {
+					if(this.currFocused === 0) {
 						this.focusableElements.last().focus();
 						this.currFocused = this.focusableElements.length - 1;
 					} else {
@@ -416,7 +416,7 @@ Modalbox.Methods = {
 				this._preventScroll(event);
 				break;
 			case 0: // For Gecko browsers compatibility
-				if(event.which == 32) this._preventScroll(event);
+				if(event.which === 32) this._preventScroll(event);
 				break;
 			case Event.KEY_UP:
 			case Event.KEY_DOWN:
@@ -427,7 +427,7 @@ Modalbox.Methods = {
 				// Safari operates in slightly different way. This realization is still buggy in Safari.
 				if(Prototype.Browser.WebKit && !["textarea", "select"].include(node.tagName.toLowerCase()))
 					event.stop();
-				else if( (node.tagName.toLowerCase() == "input" && ["submit", "button"].include(node.type)) || (node.tagName.toLowerCase() == "a") )
+				else if( (node.tagName.toLowerCase() === "input" && ["submit", "button"].include(node.type)) || (node.tagName.toLowerCase() === "a") )
 					event.stop();
 				break;
 		}
@@ -460,7 +460,7 @@ Modalbox.Methods = {
 		}
 		
 		/* Replacing prefixes 'MB_' in IDs for the original content */
-		if(typeof this.content == 'object') {
+		if(typeof this.content === 'object') {
 			if(this.content.id && this.content.id.match(/MB_/)) {
 				this.content.id = this.content.id.replace(/MB_/, "");
 			}
@@ -501,7 +501,7 @@ Modalbox.Methods = {
 		if(this.options[eventName]) {
 			var returnValue = this.options[eventName](); // Executing callback
 			this.options[eventName] = null; // Removing callback after execution
-			if(returnValue != undefined) 
+			if(returnValue !== undefined)
 				return returnValue;
 			else 
 				return true;
@@ -517,7 +517,7 @@ if(Modalbox.overrideAlert) window.alert = Modalbox.alert;
 Effect.ScaleBy = Class.create();
 Object.extend(Object.extend(Effect.ScaleBy.prototype, Effect.Base.prototype), {
   initialize: function(element, byWidth, byHeight, options) {
-    this.element = $(element)
+    this.element = $(element);
     var options = Object.extend({
 	  scaleFromTop: true,
       scaleMode: 'box',        // 'box' or 'contents' or {} with provided values
@@ -533,7 +533,7 @@ Object.extend(Object.extend(Effect.ScaleBy.prototype, Effect.Base.prototype), {
     this.originalLeft = this.element.offsetLeft;
 	
     this.dims = null;
-    if(this.options.scaleMode=='box')
+    if(this.options.scaleMode==='box')
       this.dims = [this.element.offsetHeight, this.element.offsetWidth];
 	 if(/^content/.test(this.options.scaleMode))
       this.dims = [this.element.scrollHeight, this.element.scrollWidth];
@@ -561,7 +561,7 @@ Object.extend(Object.extend(Effect.ScaleBy.prototype, Effect.Base.prototype), {
     
 	var topd  = Math.round((height - this.dims[0])/2);
 	var leftd = Math.round((width  - this.dims[1])/2);
-	if(this.elementPositioning == 'absolute' || this.elementPositioning == 'fixed') {
+	if(this.elementPositioning === 'absolute' || this.elementPositioning === 'fixed') {
 		if(!this.options.scaleFromTop) d.top = this.originalTop-topd + 'px';
 		d.left = this.originalLeft-leftd + 'px';
 	} else {

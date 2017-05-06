@@ -85,11 +85,9 @@ var css = {
 		}
 		
 		var regex = new RegExp('\\b'+classString+'\\b');
-		if (el.className.match(regex)) {
-			return true;
-		}
+		return !!el.className.match(regex);
 
-		return false;
+
 	},
 
 	/**
@@ -134,7 +132,7 @@ var css = {
 		var classArray = this.privateGetClassArray(el);
 
 		for (x in classArray) {
-			if (classString == classArray[x]) {
+			if (classString === classArray[x]) {
 				classArray[x] = '';
 				break;
 			}
@@ -142,4 +140,4 @@ var css = {
 
 		el.className = this.privateCreateClassString(classArray);
 	}
-}
+};

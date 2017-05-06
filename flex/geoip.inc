@@ -449,7 +449,8 @@ function geoip_org_by_addr ($gi,$addr) {
   return _get_org($gi, $ipnum);
 }
 
-function _get_region($gi,$ipnum){
+/** @noinspection PhpInconsistentReturnPointsInspection */
+function _get_region($gi, $ipnum){
   if ($gi->databaseType == GEOIP_REGION_EDITION_REV0){
     $seek_region = _geoip_seek_country($gi,$ipnum) - GEOIP_STATE_BEGIN_REV0;
     if ($seek_region >= 1000){

@@ -172,4 +172,4 @@ Tooltip.prototype = {
     return innerWidth;	
   }
 
-}
+};

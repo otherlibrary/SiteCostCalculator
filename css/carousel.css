@@ -43,7 +43,7 @@
  * VERTICAL CAROUSEL DEFAULTS
  **/
 .carousel-component .carousel-vertical li { 
-	margin-bottom:0px;
+	margin-bottom:0;
 
 	/* Fix for extra spacing in IE */
 	float:left;
@@ -63,7 +63,7 @@
 
 .carousel-component .carousel-clip-region { 
 	overflow:hidden; /* Secret to the clipping */
-	margin:0px auto;
+	margin:0 auto;
 	position:relative; 
 }
 
@@ -76,19 +76,19 @@
 
 .carousel-component { 
 	#background:#e2edfa;
-	padding:0px;
+	padding:0;
 	-moz-border-radius:6px;
 	color:#618cbe;
 }
 .carousel-component ul.carousel-list { 
-	margin:0px;
-	padding:0px;
-	line-height:0px;
+	margin:0;
+	padding:0;
+	line-height:0;
 }
 .carousel-component .carousel-list li { 
 	text-align:center;
-	margin:0px;
-	padding:0px;
+	margin:0;
+	padding:0;
 	font:10px verdana,arial,sans-serif;
 	color:#666;
 }

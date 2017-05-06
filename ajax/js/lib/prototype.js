@@ -15,7 +15,7 @@ var Prototype = {
   ScriptFragment: '(?:<script.*?>)((\n|\r|.)*?)(?:<\/script>)',
   emptyFunction: function() {},
   K: function(x) { return x }
-}
+};
 
 var Class = {
   create: function() {
@@ -23,7 +23,7 @@ var Class = {
       this.initialize.apply(this, arguments);
     }
   }
-}
+};
 
 var Abstract = new Object();
 
@@ -32,7 +32,7 @@ Object.extend = function(destination, source) {
     destination[property] = source[property];
   }
   return destination;
-}
+};
 
 Object.extend(Object, {
   inspect: function(object) {
@@ -70,14 +70,14 @@ Function.prototype.bind = function() {
   return function() {
     return __method.apply(object, args.concat($A(arguments)));
   }
-}
+};
 
 Function.prototype.bindAsEventListener = function(object) {
   var __method = this, args = $A(arguments), object = args.shift();
   return function(event) {
     return __method.apply(object, [( event || window.event)].concat(args).concat($A(arguments)));
   }
-}
+};
 
 Object.extend(Number.prototype, {
   toColorPart: function() {
@@ -110,7 +110,7 @@ var Try = {
 
     return returnValue;
   }
-}
+};
 
 /*--------------------------------------------------------------------------*/
 
@@ -144,7 +144,7 @@ PeriodicalExecuter.prototype = {
       }
     }
   }
-}
+};
 Object.extend(String.prototype, {
   gsub: function(pattern, replacement) {
     var result = '', source = this, match;
@@ -239,9 +239,9 @@ Object.extend(String.prototype, {
 
   camelize: function() {
     var oStringList = this.split('-');
-    if (oStringList.length == 1) return oStringList[0];
+    if (oStringList.length === 1) return oStringList[0];
 
-    var camelizedString = this.indexOf('-') == 0
+    var camelizedString = this.indexOf('-') === 0
       ? oStringList[0].charAt(0).toUpperCase() + oStringList[0].substring(1)
       : oStringList[0];
 
@@ -263,10 +263,10 @@ Object.extend(String.prototype, {
 });
 
 String.prototype.gsub.prepareReplacement = function(replacement) {
-  if (typeof replacement == 'function') return replacement;
+  if (typeof replacement === 'function') return replacement;
   var template = new Template(replacement);
   return function(match) { return template.evaluate(match) };
-}
+};
 
 String.prototype.parseQuery = String.prototype.toQueryParams;
 
@@ -281,11 +281,11 @@ Template.prototype = {
   evaluate: function(object) {
     return this.template.gsub(this.pattern, function(match) {
       var before = match[1];
-      if (before == '\\') return match[2];
+      if (before === '\\') return match[2];
       return before + (object[match[3]] || '').toString();
     });
   }
-}
+};
 
 var $break    = new Object();
 var $continue = new Object();
@@ -298,11 +298,11 @@ var Enumerable = {
         try {
           iterator(value, index++);
         } catch (e) {
-          if (e != $continue) throw e;
+          if (e !== $continue) throw e;
         }
       });
     } catch (e) {
-      if (e != $break) throw e;
+      if (e !== $break) throw e;
     }
     return this;
   },
@@ -366,14 +366,14 @@ var Enumerable = {
       var stringValue = value.toString();
       if (stringValue.match(pattern))
         results.push((iterator || Prototype.K)(value, index));
-    })
+    });
     return results;
   },
 
   include: function(object) {
     var found = false;
     this.each(function(value) {
-      if (value == object) {
+      if (value === object) {
         found = true;
         throw $break;
       }
@@ -408,7 +408,7 @@ var Enumerable = {
     var result;
     this.each(function(value, index) {
       value = (iterator || Prototype.K)(value, index);
-      if (result == undefined || value >= result)
+      if (result === undefined || value >= result)
         result = value;
     });
     return result;
@@ -418,7 +418,7 @@ var Enumerable = {
     var result;
     this.each(function(value, index) {
       value = (iterator || Prototype.K)(value, index);
-      if (result == undefined || value < result)
+      if (result === undefined || value < result)
         result = value;
     });
     return result;
@@ -465,7 +465,7 @@ var Enumerable = {
 
   zip: function() {
     var iterator = Prototype.K, args = $A(arguments);
-    if (typeof args.last() == 'function')
+    if (typeof args.last() === 'function')
       iterator = args.pop();
 
     var collections = [this].concat(args).map($A);
@@ -477,7 +477,7 @@ var Enumerable = {
   inspect: function() {
     return '#<Enumerable:' + this.toArray().inspect() + '>';
   }
-}
+};
 
 Object.extend(Enumerable, {
   map:     Enumerable.collect,
@@ -496,7 +496,7 @@ var $A = Array.from = function(iterable) {
       results.push(iterable[i]);
     return results;
   }
-}
+};
 
 Object.extend(Array.prototype, Enumerable);
 
@@ -524,13 +524,13 @@ Object.extend(Array.prototype, {
 
   compact: function() {
     return this.select(function(value) {
-      return value != undefined || value != null;
+      return value !== undefined || value !== null;
     });
   },
 
   flatten: function() {
     return this.inject([], function(array, value) {
-      return array.concat(value && value.constructor == Array ?
+      return array.concat(value && value.constructor === Array ?
         value.flatten() : [value]);
     });
   },
@@ -544,7 +544,7 @@ Object.extend(Array.prototype, {
 
   indexOf: function(object) {
     for (var i = 0, length = this.length; i < length; i++)
-      if (this[i] == object) return i;
+      if (this[i] === object) return i;
     return -1;
   },
 
@@ -576,7 +576,7 @@ var Hash = {
   _each: function(iterator) {
     for (var key in this) {
       var value = this[key];
-      if (typeof value == 'function') continue;
+      if (typeof value === 'function') continue;
 
       var pair = [key, value];
       pair.key = key;
@@ -613,7 +613,7 @@ var Hash = {
       return pair.map(Object.inspect).join(': ');
     }).join(', ') + '}>';
   }
-}
+};
 
 function $H(object) {
   var hash = Object.extend({}, object || {});
@@ -649,7 +649,7 @@ Object.extend(ObjectRange.prototype, {
 
 var $R = function(start, end, exclusive) {
   return new ObjectRange(start, end, exclusive);
-}
+};
 
 var Ajax = {
   getTransport: function() {
@@ -661,7 +661,7 @@ var Ajax = {
   },
 
   activeRequestCount: 0
-}
+};
 
 Ajax.Responders = {
   responders: [],
@@ -681,7 +681,7 @@ Ajax.Responders = {
 
   dispatch: function(callback, request, transport, json) {
     this.each(function(responder) {
-      if (typeof responder[callback] == 'function') {
+      if (typeof responder[callback] === 'function') {
         try {
           responder[callback].apply(responder, [request, transport, json]);
         } catch (e) {}
@@ -710,14 +710,14 @@ Ajax.Base.prototype = {
       contentType:  'application/x-www-form-urlencoded',
       encoding:     'UTF-8',
       parameters:   ''
-    }
+    };
     Object.extend(this.options, options || {});
 
     this.options.method = this.options.method.toLowerCase();
-    this.options.parameters = $H(typeof this.options.parameters == 'string' ?
+    this.options.parameters = $H(typeof this.options.parameters === 'string' ?
       this.options.parameters.toQueryParams() : this.options.parameters);
   }
-}
+};
 
 Ajax.Request = Class.create();
 Ajax.Request.Events =
@@ -743,7 +743,7 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
     this.url = url;
 
     // when GET, append parameters to URL
-    if (this.options.method == 'get' && params.any())
+    if (this.options.method === 'get' && params.any())
       this.url += (this.url.indexOf('?') >= 0 ? '&' : '?') +
         params.toQueryString();
 
@@ -760,7 +760,7 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
       this.transport.onreadystatechange = this.onStateChange.bind(this);
       this.setRequestHeaders();
 
-      var body = this.options.method == 'post' ?
+      var body = this.options.method === 'post' ?
         (this.options.postBody || params.toQueryString()) : null;
 
       this.transport.send(body);
@@ -787,7 +787,7 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
       'Accept': 'text/javascript, text/html, application/xml, text/xml, */*'
     };
 
-    if (this.options.method == 'post') {
+    if (this.options.method === 'post') {
       headers['Content-type'] = this.options.contentType +
         (this.options.encoding ? '; charset=' + this.options.encoding : '');
 
@@ -801,10 +801,10 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
     }
 
     // user-defined headers
-    if (typeof this.options.requestHeaders == 'object') {
+    if (typeof this.options.requestHeaders === 'object') {
       var extras = this.options.requestHeaders;
 
-      if (typeof extras.push == 'function')
+      if (typeof extras.push === 'function')
         for (var i = 0; i < extras.length; i += 2)
           headers[extras[i]] = extras[i+1];
       else
@@ -824,7 +824,7 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
     var state = Ajax.Request.Events[readyState];
     var transport = this.transport, json = this.evalJSON();
 
-    if (state == 'Complete') {
+    if (state === 'Complete') {
       try {
         (this.options['on' + this.transport.status]
          || this.options['on' + (this.success() ? 'Success' : 'Failure')]
@@ -841,7 +841,7 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
       this.dispatchException(e);
     }
 
-    if (state == 'Complete') {
+    if (state === 'Complete') {
       if ((this.getHeader('Content-type') || '').strip().
         match(/^(text|application)\/(x-)?(java|ecma)script(;.*)?$/i))
           this.evalResponse();
@@ -885,7 +885,7 @@ Object.extend(Object.extend(Ajax.Updater.prototype, Ajax.Request.prototype), {
     this.container = {
       success: (container.success || container),
       failure: (container.failure || (container.success ? null : container))
-    }
+    };
 
     this.transport = Ajax.getTransport();
     this.setOptions(options);
@@ -948,7 +948,7 @@ Ajax.PeriodicalUpdater.prototype = Object.extend(new Ajax.Base(), {
 
   updateComplete: function(request) {
     if (this.options.decay) {
-      this.decay = (request.responseText == this.lastText ?
+      this.decay = (request.responseText === this.lastText ?
         this.decay * this.options.decay : 1);
 
       this.lastText = request.responseText;
@@ -967,7 +967,7 @@ function $(element) {
       elements.push($(arguments[i]));
     return elements;
   }
-  if (typeof element == 'string')
+  if (typeof element === 'string')
     element = document.getElementById(element);
   return Element.extend(element);
 }
@@ -997,7 +997,7 @@ document.getElementsByClassName = function(className, parentElement) {
     }
     return elements;
   }
-}
+};
 
 /*--------------------------------------------------------------------------*/
 
@@ -1006,33 +1006,33 @@ if (!window.Element)
 
 Element.extend = function(element) {
   if (!element) return;
-  if (_nativeExtensions || element.nodeType == 3) return element;
+  if (_nativeExtensions || element.nodeType === 3) return element;
 
-  if (!element._extended && element.tagName && element != window) {
+  if (!element._extended && element.tagName && element !== window) {
     var methods = Object.clone(Element.Methods), cache = Element.extend.cache;
 
-    if (element.tagName == 'FORM')
+    if (element.tagName === 'FORM')
       Object.extend(methods, Form.Methods);
     if (['INPUT', 'TEXTAREA', 'SELECT'].include(element.tagName))
       Object.extend(methods, Form.Element.Methods);
 
     for (var property in methods) {
       var value = methods[property];
-      if (typeof value == 'function')
+      if (typeof value === 'function')
         element[property] = cache.findOrStore(value);
     }
 
     var methods = Object.clone(Element.Methods.Simulated), cache = Element.extend.cache;
     for (var property in methods) {
       var value = methods[property];
-      if ('function' == typeof value && !(property in element))
+      if ('function' === typeof value && !(property in element))
         element[property] = cache.findOrStore(value);
     }
   }
 
   element._extended = true;
   return element;
-}
+};
 
 Element.extend.cache = {
   findOrStore: function(value) {
@@ -1040,11 +1040,11 @@ Element.extend.cache = {
       return value.apply(null, [this].concat($A(arguments)));
     }
   }
-}
+};
 
 Element.Methods = {
   visible: function(element) {
-    return $(element).style.display != 'none';
+    return $(element).style.display !== 'none';
   },
 
   toggle: function(element) {
@@ -1070,7 +1070,7 @@ Element.Methods = {
   },
 
   update: function(element, html) {
-    html = typeof html == 'undefined' ? '' : html.toString();
+    html = typeof html === 'undefined' ? '' : html.toString();
     $(element).innerHTML = html.stripScripts();
     setTimeout(function() {html.evalScripts()}, 10);
     return element;
@@ -1105,7 +1105,7 @@ Element.Methods = {
     element = $(element);
     var elements = [];
     while (element = element[property])
-      if (element.nodeType == 1)
+      if (element.nodeType === 1)
         elements.push(Element.extend(element));
     return elements;
   },
@@ -1134,7 +1134,7 @@ Element.Methods = {
 
   match: function(element, selector) {
     element = $(element);
-    if (typeof selector == 'string')
+    if (typeof selector === 'string')
       selector = new Selector(selector);
     return selector.match(element);
   },
@@ -1177,11 +1177,10 @@ Element.Methods = {
   hasClassName: function(element, className) {
     if (!(element = $(element))) return;
     var elementClassName = element.className;
-    if (elementClassName.length == 0) return false;
-    if (elementClassName == className ||
-        elementClassName.match(new RegExp("(^|\\s)" + className + "(\\s|$)")))
-      return true;
-    return false;
+    if (elementClassName.length === 0) return false;
+    return !!(elementClassName == className ||
+    elementClassName.match(new RegExp("(^|\\s)" + className + "(\\s|$)")));
+
   },
 
   addClassName: function(element, className) {
@@ -1212,7 +1211,7 @@ Element.Methods = {
     var node = element.firstChild;
     while (node) {
       var nextNode = node.nextSibling;
-      if (node.nodeType == 3 && !/\S/.test(node.nodeValue))
+      if (node.nodeType === 3 && !/\S/.test(node.nodeValue))
         element.removeChild(node);
       node = nextNode;
     }
@@ -1226,7 +1225,7 @@ Element.Methods = {
   childOf: function(element, ancestor) {
     element = $(element), ancestor = $(ancestor);
     while (element = element.parentNode)
-      if (element == ancestor) return true;
+      if (element === ancestor) return true;
     return false;
   },
 
@@ -1251,9 +1250,9 @@ Element.Methods = {
     }
 
     if (window.opera && ['left', 'top', 'right', 'bottom'].include(style))
-      if (Element.getStyle(element, 'position') == 'static') value = 'auto';
+      if (Element.getStyle(element, 'position') === 'static') value = 'auto';
 
-    return value == 'auto' ? null : value;
+    return value === 'auto' ? null : value;
   },
 
   setStyle: function(element, style) {
@@ -1265,7 +1264,7 @@ Element.Methods = {
 
   getDimensions: function(element) {
     element = $(element);
-    if (Element.getStyle(element, 'display') != 'none')
+    if (Element.getStyle(element, 'display') !== 'none')
       return {width: element.offsetWidth, height: element.offsetHeight};
 
     // All *Width and *Height properties give 0 on elements with display none,
@@ -1287,7 +1286,7 @@ Element.Methods = {
   makePositioned: function(element) {
     element = $(element);
     var pos = Element.getStyle(element, 'position');
-    if (pos == 'static' || !pos) {
+    if (pos === 'static' || !pos) {
       element._madePositioned = true;
       element.style.position = 'relative';
       // Opera returns the offset relative to the positioning context, when an
@@ -1317,7 +1316,7 @@ Element.Methods = {
     element = $(element);
     if (element._overflow) return element;
     element._overflow = element.style.overflow || 'auto';
-    if ((Element.getStyle(element, 'overflow') || 'visible') != 'hidden')
+    if ((Element.getStyle(element, 'overflow') || 'visible') !== 'hidden')
       element.style.overflow = 'hidden';
     return element;
   },
@@ -1325,23 +1324,23 @@ Element.Methods = {
   undoClipping: function(element) {
     element = $(element);
     if (!element._overflow) return element;
-    element.style.overflow = element._overflow == 'auto' ? '' : element._overflow;
+    element.style.overflow = element._overflow === 'auto' ? '' : element._overflow;
     element._overflow = null;
     return element;
   }
-}
+};
 
 Element.Methods.Simulated = {
   hasAttribute: function(element, attribute) {
     return $(element).getAttributeNode(attribute).specified;
   }
-}
+};
 
 // IE is missing .innerHTML support for TABLE-related elements
 if(document.all){
   Element.Methods.update = function(element, html) {
     element = $(element);
-    html = typeof html == 'undefined' ? '' : html.toString();
+    html = typeof html === 'undefined' ? '' : html.toString();
     var tagName = element.tagName.toUpperCase();
     if (['THEAD','TBODY','TR','TD'].indexOf(tagName) > -1) {
       var div = document.createElement('div');
@@ -1399,7 +1398,7 @@ Element.addMethods = function(methods) {
     }
   }
 
-  if (typeof HTMLElement != 'undefined') {
+  if (typeof HTMLElement !== 'undefined') {
     copy(Element.Methods, HTMLElement.prototype);
     copy(Element.Methods.Simulated, HTMLElement.prototype, true);
     copy(Form.Methods, HTMLFormElement.prototype);
@@ -1408,7 +1407,7 @@ Element.addMethods = function(methods) {
     });
     _nativeExtensions = true;
   }
-}
+};
 
 var Toggle = new Object();
 Toggle.display = Element.toggle;
@@ -1417,7 +1416,7 @@ Toggle.display = Element.toggle;
 
 Abstract.Insertion = function(adjacency) {
   this.adjacency = adjacency;
-}
+};
 
 Abstract.Insertion.prototype = {
   initialize: function(element, content) {
@@ -1429,7 +1428,7 @@ Abstract.Insertion.prototype = {
         this.element.insertAdjacentHTML(this.adjacency, this.content);
       } catch (e) {
         var tagName = this.element.tagName.toLowerCase();
-        if (tagName == 'tbody' || tagName == 'tr') {
+        if (tagName === 'tbody' || tagName === 'tr') {
           this.insertContent(this.contentFromAnonymousTable());
         } else {
           throw e;
@@ -1449,7 +1448,7 @@ Abstract.Insertion.prototype = {
     div.innerHTML = '<table><tbody>' + this.content + '</tbody></table>';
     return $A(div.childNodes[0].childNodes[0].childNodes);
   }
-}
+};
 
 var Insertion = new Object();
 
@@ -1539,7 +1538,7 @@ Element.ClassNames.prototype = {
   toString: function() {
     return $A(this).join(' ');
   }
-}
+};
 
 Object.extend(Element.ClassNames.prototype, Enumerable);
 var Selector = Class.create();
@@ -1554,7 +1553,7 @@ Selector.prototype = {
   parseExpression: function() {
     function abort(message) { throw 'Parse error in selector: ' + message; }
 
-    if (this.expression == '')  abort('empty expression');
+    if (this.expression === '')  abort('empty expression');
 
     var params = this.params, expr = this.expression, match, modifier, clause, rest;
     while (match = expr.match(/^(.*)\[([a-z0-9_:-]+?)(?:([~\|!]?=)(?:"([^"]*)"|([^\]\s]*)))?\]$/i)) {
@@ -1563,7 +1562,7 @@ Selector.prototype = {
       expr = match[1];
     }
 
-    if (expr == '*') return this.params.wildcard = true;
+    if (expr === '*') return this.params.wildcard = true;
 
     while (match = expr.match(/^([^a-z0-9_-])?([a-z0-9_-]+)(.*)/i)) {
       modifier = match[1], clause = match[2], rest = match[3];
@@ -1597,7 +1596,7 @@ Selector.prototype = {
         var value = 'element.getAttribute(' + attribute.name.inspect() + ')';
         var splitValueBy = function(delimiter) {
           return value + ' && ' + value + '.split(' + delimiter.inspect() + ')';
-        }
+        };
 
         switch (attribute.operator) {
           case '=':       conditions.push(value + ' == ' + attribute.value.inspect()); break;
@@ -1642,7 +1641,7 @@ Selector.prototype = {
   toString: function() {
     return this.expression;
   }
-}
+};
 
 Object.extend(Selector, {
   matchElements: function(elements, expression) {
@@ -1651,7 +1650,7 @@ Object.extend(Selector, {
   },
 
   findElement: function(elements, expression, index) {
-    if (typeof expression == 'number') index = expression, expression = false;
+    if (typeof expression === 'number') index = expression, expression = false;
     return Selector.matchElements(elements, expression || '*')[index || 0];
   },
 
@@ -1710,8 +1709,8 @@ Form.Methods = {
     var matchingInputs = new Array();
     for (var i = 0, length = inputs.length; i < length; i++) {
       var input = inputs[i];
-      if ((typeName && input.type != typeName) ||
-          (name && input.name != name))
+      if ((typeName && input.type !== typeName) ||
+          (name && input.name !== name))
         continue;
       matchingInputs.push(Element.extend(input));
     }
@@ -1738,7 +1737,7 @@ Form.Methods = {
 
   findFirstElement: function(form) {
     return $(form).getElements().find(function(element) {
-      return element.type != 'hidden' && !element.disabled &&
+      return element.type !== 'hidden' && !element.disabled &&
         ['input', 'select', 'textarea'].include(element.tagName.toLowerCase());
     });
   },
@@ -1748,7 +1747,7 @@ Form.Methods = {
     form.findFirstElement().activate();
     return form;
   }
-}
+};
 
 Object.extend(Form, Form.Methods);
 
@@ -1764,7 +1763,7 @@ Form.Element = {
     $(element).select();
     return element;
   }
-}
+};
 
 Form.Element.Methods = {
   serialize: function(element) {
@@ -1775,9 +1774,9 @@ Form.Element.Methods = {
 
     if (parameter) {
       var key = encodeURIComponent(parameter[0]);
-      if (key.length == 0) return;
+      if (key.length === 0) return;
 
-      if (parameter[1].constructor != Array)
+      if (parameter[1].constructor !== Array)
         parameter[1] = [parameter[1]];
 
       return parameter[1].map(function(value) {
@@ -1801,7 +1800,7 @@ Form.Element.Methods = {
   },
 
   present: function(element) {
-    return $(element).value != '';
+    return $(element).value !== '';
   },
 
   activate: function(element) {
@@ -1824,7 +1823,7 @@ Form.Element.Methods = {
     element.disabled = false;
     return element;
   }
-}
+};
 
 Object.extend(Form.Element, Form.Element.Methods);
 var Field = Form.Element;
@@ -1853,7 +1852,7 @@ Form.Element.Serializers = {
   },
 
   select: function(element) {
-    return Form.Element.Serializers[element.type == 'select-one' ?
+    return Form.Element.Serializers[element.type === 'select-one' ?
       'selectOne' : 'selectMany'](element);
   },
 
@@ -1877,7 +1876,7 @@ Form.Element.Serializers = {
     }
     return [element.name, value];
   }
-}
+};
 
 /*--------------------------------------------------------------------------*/
 
@@ -1885,7 +1884,7 @@ var $F = Form.Element.getValue;
 
 /*--------------------------------------------------------------------------*/
 
-Abstract.TimedObserver = function() {}
+Abstract.TimedObserver = function() {};
 Abstract.TimedObserver.prototype = {
   initialize: function(element, frequency, callback) {
     this.frequency = frequency;
@@ -1902,12 +1901,12 @@ Abstract.TimedObserver.prototype = {
 
   onTimerEvent: function() {
     var value = this.getValue();
-    if (this.lastValue != value) {
+    if (this.lastValue !== value) {
       this.callback(this.element, value);
       this.lastValue = value;
     }
   }
-}
+};
 
 Form.Element.Observer = Class.create();
 Form.Element.Observer.prototype = Object.extend(new Abstract.TimedObserver(), {
@@ -1925,14 +1924,14 @@ Form.Observer.prototype = Object.extend(new Abstract.TimedObserver(), {
 
 /*--------------------------------------------------------------------------*/
 
-Abstract.EventObserver = function() {}
+Abstract.EventObserver = function() {};
 Abstract.EventObserver.prototype = {
   initialize: function(element, callback) {
     this.element  = $(element);
     this.callback = callback;
 
     this.lastValue = this.getValue();
-    if (this.element.tagName.toLowerCase() == 'form')
+    if (this.element.tagName.toLowerCase() === 'form')
       this.registerFormCallbacks();
     else
       this.registerCallback(this.element);
@@ -1940,7 +1939,7 @@ Abstract.EventObserver.prototype = {
 
   onElementEvent: function() {
     var value = this.getValue();
-    if (this.lastValue != value) {
+    if (this.lastValue !== value) {
       this.callback(this.element, value);
       this.lastValue = value;
     }
@@ -1963,7 +1962,7 @@ Abstract.EventObserver.prototype = {
       }
     }
   }
-}
+};
 
 Form.Element.EventObserver = Class.create();
 Form.Element.EventObserver.prototype = Object.extend(new Abstract.EventObserver(), {
@@ -2002,8 +2001,8 @@ Object.extend(Event, {
   },
 
   isLeftClick: function(event) {
-    return (((event.which) && (event.which == 1)) ||
-            ((event.button) && (event.button == 1)));
+    return (((event.which) && (event.which === 1)) ||
+            ((event.button) && (event.button === 1)));
   },
 
   pointerX: function(event) {
@@ -2031,7 +2030,7 @@ Object.extend(Event, {
   findElement: function(event, tagName) {
     var element = Event.element(event);
     while (element.parentNode && (!element.tagName ||
-        (element.tagName.toUpperCase() != tagName.toUpperCase())))
+        (element.tagName.toUpperCase() !== tagName.toUpperCase())))
       element = element.parentNode;
     return element;
   },
@@ -2062,7 +2061,7 @@ Object.extend(Event, {
     element = $(element);
     useCapture = useCapture || false;
 
-    if (name == 'keypress' &&
+    if (name === 'keypress' &&
         (navigator.appVersion.match(/Konqueror|Safari|KHTML/)
         || element.attachEvent))
       name = 'keydown';
@@ -2074,7 +2073,7 @@ Object.extend(Event, {
     element = $(element);
     useCapture = useCapture || false;
 
-    if (name == 'keypress' &&
+    if (name === 'keypress' &&
         (navigator.appVersion.match(/Konqueror|Safari|KHTML/)
         || element.detachEvent))
       name = 'keydown';
@@ -2138,9 +2137,9 @@ var Position = {
       valueL += element.offsetLeft || 0;
       element = element.offsetParent;
       if (element) {
-        if(element.tagName=='BODY') break;
+        if(element.tagName==='BODY') break;
         var p = Element.getStyle(element, 'position');
-        if (p == 'relative' || p == 'absolute') break;
+        if (p === 'relative' || p === 'absolute') break;
       }
     } while (element);
     return [valueL, valueT];
@@ -2148,10 +2147,10 @@ var Position = {
 
   offsetParent: function(element) {
     if (element.offsetParent) return element.offsetParent;
-    if (element == document.body) return element;
+    if (element === document.body) return element;
 
-    while ((element = element.parentNode) && element != document.body)
-      if (Element.getStyle(element, 'position') != 'static')
+    while ((element = element.parentNode) && element !== document.body)
+      if (Element.getStyle(element, 'position') !== 'static')
         return element;
 
     return document.body;
@@ -2187,10 +2186,10 @@ var Position = {
   // within must be called directly before
   overlap: function(mode, element) {
     if (!mode) return 0;
-    if (mode == 'vertical')
+    if (mode === 'vertical')
       return ((this.offset[1] + element.offsetHeight) - this.ycomp) /
         element.offsetHeight;
-    if (mode == 'horizontal')
+    if (mode === 'horizontal')
       return ((this.offset[0] + element.offsetWidth) - this.xcomp) /
         element.offsetWidth;
   },
@@ -2204,14 +2203,14 @@ var Position = {
       valueL += element.offsetLeft || 0;
 
       // Safari fix
-      if (element.offsetParent==document.body)
-        if (Element.getStyle(element,'position')=='absolute') break;
+      if (element.offsetParent===document.body)
+        if (Element.getStyle(element,'position')==='absolute') break;
 
     } while (element = element.offsetParent);
 
     element = forElement;
     do {
-      if (!window.opera || element.tagName=='BODY') {
+      if (!window.opera || element.tagName==='BODY') {
         valueT -= element.scrollTop  || 0;
         valueL -= element.scrollLeft || 0;
       }
@@ -2228,7 +2227,7 @@ var Position = {
       setHeight:  true,
       offsetTop:  0,
       offsetLeft: 0
-    }, arguments[2] || {})
+    }, arguments[2] || {});
 
     // find page position of source
     source = $(source);
@@ -2240,13 +2239,13 @@ var Position = {
     var parent = null;
     // delta [0,0] will do fine with position: fixed elements,
     // position:absolute needs offsetParent deltas
-    if (Element.getStyle(target,'position') == 'absolute') {
+    if (Element.getStyle(target,'position') === 'absolute') {
       parent = Position.offsetParent(target);
       delta = Position.page(parent);
     }
 
     // correct by body offsets (fixes Safari)
-    if (parent == document.body) {
+    if (parent === document.body) {
       delta[0] -= document.body.offsetLeft;
       delta[1] -= document.body.offsetTop;
     }
@@ -2260,7 +2259,7 @@ var Position = {
 
   absolutize: function(element) {
     element = $(element);
-    if (element.style.position == 'absolute') return;
+    if (element.style.position === 'absolute') return;
     Position.prepare();
 
     var offsets = Position.positionedOffset(element);
@@ -2275,15 +2274,15 @@ var Position = {
     element._originalHeight = element.style.height;
 
     element.style.position = 'absolute';
-    element.style.top    = top + 'px';;
-    element.style.left   = left + 'px';;
-    element.style.width  = width + 'px';;
-    element.style.height = height + 'px';;
+      element.style.top = top + 'px';
+      element.style.left = left + 'px';
+      element.style.width = width + 'px';
+      element.style.height = height + 'px';
   },
 
   relativize: function(element) {
     element = $(element);
-    if (element.style.position == 'relative') return;
+    if (element.style.position === 'relative') return;
     Position.prepare();
 
     element.style.position = 'relative';
@@ -2295,7 +2294,7 @@ var Position = {
     element.style.height = element._originalHeight;
     element.style.width  = element._originalWidth;
   }
-}
+};
 
 // Safari returns margins on body which is incorrect if the child is absolutely
 // positioned.  For performance reasons, redefine Position.cumulativeOffset for
@@ -2306,8 +2305,8 @@ if (/Konqueror|Safari|KHTML/.test(navigator.userAgent)) {
     do {
       valueT += element.offsetTop  || 0;
       valueL += element.offsetLeft || 0;
-      if (element.offsetParent == document.body)
-        if (Element.getStyle(element, 'position') == 'absolute') break;
+      if (element.offsetParent === document.body)
+        if (Element.getStyle(element, 'position') === 'absolute') break;
 
       element = element.offsetParent;
     } while (element);

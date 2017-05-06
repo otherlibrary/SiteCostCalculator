@@ -49,12 +49,14 @@
  */
 
 /**
- * Takes an UTF-8 string and returns an array of ints representing the 
+ * Takes an UTF-8 string and returns an array of ints representing the
  * Unicode characters. Astral planes are supported ie. the ints in the
  * output can be > 0xFFFF. Occurrances of the BOM are ignored. Surrogates
  * are not allowed.
  *
  * Returns false if the input string isn't a valid UTF-8 octet sequence.
+ * @param $str
+ * @return array|bool
  */
 function utf8ToUnicode(&$str)
 {
@@ -168,13 +170,15 @@ function utf8ToUnicode(&$str)
 }
 
 /**
- * Takes an array of ints representing the Unicode characters and returns 
+ * Takes an array of ints representing the Unicode characters and returns
  * a UTF-8 string. Astral planes are supported ie. the ints in the
  * input can be > 0xFFFF. Occurrances of the BOM are ignored. Surrogates
  * are not allowed.
  *
- * Returns false if the input array contains ints that represent 
+ * Returns false if the input array contains ints that represent
  * surrogates or are outside the Unicode range.
+ * @param $arr
+ * @return string
  */
 function unicodeToUtf8(&$arr)
 {

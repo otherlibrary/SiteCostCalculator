@@ -49,7 +49,8 @@ h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited, h5 a:visited {color:#677
 #bd ul {margin-top:2px; }
 #bd ul.topspace { margin-top:1em }
 /*#bd ul li { margin:0 17px 0 7px; }*/
-#bd ul li ul { margin-top:0em }
+#bd ul li ul { margin-top:0
+}
 #bd ul.plain {margin-top: 0; list-style: none;}
 #bd ul.plain ul {margin-top: 0; list-style: none;}
 #bd ul.jump {list-style: none; margin-top: 1em;}

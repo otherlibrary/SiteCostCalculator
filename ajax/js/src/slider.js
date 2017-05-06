@@ -50,9 +50,9 @@ Control.Slider.prototype = {
     this.trackLength = this.maximumOffset() - this.minimumOffset();
 
     this.handleLength = this.isVertical() ? 
-      (this.handles[0].offsetHeight != 0 ? 
+      (this.handles[0].offsetHeight !== 0 ?
         this.handles[0].offsetHeight : this.handles[0].style.height.replace(/px$/,"")) : 
-      (this.handles[0].offsetWidth != 0 ? this.handles[0].offsetWidth : 
+      (this.handles[0].offsetWidth !== 0 ? this.handles[0].offsetWidth :
         this.handles[0].style.width.replace(/px$/,""));
 
     this.active   = false;
@@ -170,13 +170,13 @@ Control.Slider.prototype = {
   },
   maximumOffset: function(){
     return(this.isVertical() ? 
-      (this.track.offsetHeight != 0 ? this.track.offsetHeight :
+      (this.track.offsetHeight !== 0 ? this.track.offsetHeight :
         this.track.style.height.replace(/px$/,"")) - this.alignY : 
-      (this.track.offsetWidth != 0 ? this.track.offsetWidth : 
+      (this.track.offsetWidth !== 0 ? this.track.offsetWidth :
         this.track.style.width.replace(/px$/,"")) - this.alignY);
   },  
   isVertical:  function(){
-    return (this.axis == 'vertical');
+    return (this.axis === 'vertical');
   },
   drawSpans: function() {
     var slider = this;
@@ -210,7 +210,7 @@ Control.Slider.prototype = {
         var handle = Event.element(event);
         var pointer  = [Event.pointerX(event), Event.pointerY(event)];
         var track = handle;
-        if(track==this.track) {
+        if(track===this.track) {
           var offsets  = Position.cumulativeOffset(this.track); 
           this.event = event;
           this.setValue(this.translateToValue( 
@@ -221,10 +221,10 @@ Control.Slider.prototype = {
           this.offsetY = (pointer[1] - offsets[1]);
         } else {
           // find the handle (prevents issues with Safari)
-          while((this.handles.indexOf(handle) == -1) && handle.parentNode) 
+          while((this.handles.indexOf(handle) === -1) && handle.parentNode)
             handle = handle.parentNode;
             
-          if(this.handles.indexOf(handle)!=-1) {
+          if(this.handles.indexOf(handle)!==-1) {
             this.activeHandle    = handle;
             this.activeHandleIdx = this.handles.indexOf(this.activeHandle);
             this.updateStyles();
@@ -275,4 +275,4 @@ Control.Slider.prototype = {
       this.options.onChange(this.values.length>1 ? this.values : this.value, this);
     this.event = null;
   }
-}
+};

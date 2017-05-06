@@ -36,7 +36,7 @@ var Builder = {
     var element = parentElement.firstChild || null;
       
     // see if browser added wrapping tags
-    if(element && (element.tagName != elementName))
+    if(element && (element.tagName !== elementName))
       element = element.getElementsByTagName(elementName)[0];
     
     // fallback to createElement approach
@@ -62,9 +62,9 @@ var Builder = {
             if(!element) {
               element = document.createElement(elementName);
               for(attr in arguments[1]) 
-                element[attr == 'class' ? 'className' : attr] = arguments[1][attr];
+                element[attr === 'class' ? 'className' : attr] = arguments[1][attr];
             }
-            if(element.tagName != elementName)
+            if(element.tagName !== elementName)
               element = parentElement.getElementsByTagName(elementName)[0];
             }
         } 
@@ -92,10 +92,10 @@ var Builder = {
     return attrs.join(" ");
   },
   _children: function(element, children) {
-    if(typeof children=='object') { // array can hold nodes and text
+    if(typeof children==='object') { // array can hold nodes and text
       children.flatten().each( function(e) {
-        if(typeof e=='object')
-          element.appendChild(e)
+        if(typeof e==='object')
+          element.appendChild(e);
         else
           if(Builder._isStringOrNumber(e))
             element.appendChild(Builder._text(e));
@@ -105,7 +105,7 @@ var Builder = {
          element.appendChild(Builder._text(children));
   },
   _isStringOrNumber: function(param) {
-    return(typeof param=='string' || typeof param=='number');
+    return(typeof param==='string' || typeof param==='number');
   },
   build: function(html) {
     var element = this.node('div');
@@ -113,7 +113,7 @@ var Builder = {
     return element.down();
   },
   dump: function(scope) { 
-    if(typeof scope != 'object' && typeof scope != 'function') scope = window; //global scope 
+    if(typeof scope !== 'object' && typeof scope !== 'function') scope = window; //global scope
   
     var tags = ("A ABBR ACRONYM ADDRESS APPLET AREA B BASE BASEFONT BDO BIG BLOCKQUOTE BODY " +
       "BR BUTTON CAPTION CENTER CITE CODE COL COLGROUP DD DEL DFN DIR DIV DL DT EM FIELDSET " +
@@ -128,4 +128,4 @@ var Builder = {
       } 
     });
   }
-}
+};

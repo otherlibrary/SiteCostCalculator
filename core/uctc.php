@@ -16,7 +16,9 @@ class uctc
      * @param string $from Original encoding of the data
      * @param string $to Target encoding of the data
      * @param bool $safe_mode SafeMode tries to correct invalid codepoints
-     * @return mixed  False on failure, String or array on success, depending on target encoding
+     * @param int $safe_char
+     * @return mixed False on failure, String or array on success, depending on target encoding
+     * @throws Exception
      * @access public
      * @since 0.0.1
      */
@@ -36,7 +38,8 @@ class uctc
      * This converts an UTF-8 encoded string to its UCS-4 representation
      *
      * @param string $input The UTF-8 string to convert
-     * @return array  Array of 32bit values representing each codepoint
+     * @return array Array of 32bit values representing each codepoint
+     * @throws Exception
      * @access private
      */
     private static function utf8_ucs4array($input)
@@ -128,6 +131,9 @@ class uctc
      * Convert UCS-4 string into UTF-8 string
      * See utf8_ucs4array() for details
      * @access   private
+     * @param $input
+     * @return string
+     * @throws Exception
      */
     private static function ucs4array_utf8($input)
     {
@@ -249,6 +255,8 @@ class uctc
     /**
      * Convert UCS-4 array into UCS-4 string (Little Endian at the moment)
      * @access   private
+     * @param $input
+     * @return string
      */
     private static function ucs4array_ucs4($input)
     {
@@ -262,6 +270,9 @@ class uctc
     /**
      * Convert UCS-4 string (LE in the moment) into UCS-4 garray
      * @access   private
+     * @param $input
+     * @return array
+     * @throws Exception
      */
     private static function ucs4_ucs4array($input)
     {

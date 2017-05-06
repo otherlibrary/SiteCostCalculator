@@ -339,15 +339,16 @@ class GoogleMapAPI {
      * @var string
      */
     var $_db_cache_table = 'GEOCODES';
-        
-        
+
+
     /**
      * class constructor
      *
      * @param string $map_id the id for this map
      * @param string $app_id YOUR Yahoo App ID
+     * @return GoogleMapAPI
      */
-    function GoogleMapAPI($map_id = 'map', $app_id = 'MyMapApp') {
+    function __construct($map_id = 'map', $app_id = 'MyMapApp') {
         $this->map_id = $map_id;
         $this->sidebar_id = 'sidebar_' . $map_id;
         $this->app_id = $app_id;
@@ -375,6 +376,7 @@ class GoogleMapAPI {
      * sets the width of the map
      *
      * @param string $width
+     * @return bool
      */
     function setWidth($width) {
         if(!preg_match('!^(\d+)(.*)$!',$width,$_match))
@@ -394,6 +396,7 @@ class GoogleMapAPI {
      * sets the height of the map
      *
      * @param string $height
+     * @return bool
      */
     function setHeight($height) {
         if(!preg_match('!^(\d+)(.*)$!',$height,$_match))
@@ -462,7 +465,7 @@ class GoogleMapAPI {
 
     /**
      * set default map type (map/satellite/hybrid)
-     *
+     * @param $type
      */
     function setMapType($type) {
         switch($type) {
@@ -525,12 +528,13 @@ class GoogleMapAPI {
      */
     function disableDirections() {
         $this->directions = false;
-    }    
-        
+    }
+
     /**
      * set browser alert message for incompatible browsers
      *
      * @params $message string
+     * @param $message
      */
     function setBrowserAlert($message) {
         $this->browser_alert = $message;
@@ -540,6 +544,7 @@ class GoogleMapAPI {
      * set <noscript> message when javascript is disabled
      *
      * @params $message string
+     * @param $message
      */
     function setJSAlert($message) {
         $this->js_alert = $message;
@@ -558,11 +563,12 @@ class GoogleMapAPI {
     function disableInfoWindow() {
         $this->info_window = false;
     }
-    
+
     /**
      * set the info window trigger action
      *
      * @params $message string click/mouseover
+     * @param $type
      */
     function setInfoWindowTrigger($type) {
         switch($type) {
@@ -591,6 +597,7 @@ class GoogleMapAPI {
 
     /**
      * set the boundary fudge factor
+     * @param $val
      */
     function setBoundsFudge($val) {
         $this->bounds_fudge = $val;
@@ -626,15 +633,15 @@ class GoogleMapAPI {
      */
     function disableOverviewControl() {
         $this->overview_control = false;
-     }    
-    
-    
+     }
+
+
     /**
      * set the lookup service to use for geocode lookups
      * default is YAHOO, you can also use GOOGLE.
      * NOTE: GOOGLE can to intl lookups, but is not an
      * official API, so use at your own risk.
-     *
+     * @param $service
      */
     function setLookupService($service) {
         switch($service) {
@@ -647,14 +654,16 @@ class GoogleMapAPI {
                 break;
         }       
     }
-    
-        
+
+
     /**
      * adds a map marker by address
-     * 
+     *
      * @param string $address the map address to mark (street/city/state/zip)
      * @param string $title the title display in the sidebar
      * @param string $html the HTML block to display in the info bubble (if empty, title is used)
+     * @param string $tooltip
+     * @return bool|int
      */
     function addMarkerByAddress($address,$title = '',$html = '',$tooltip = '') {
         if(($_geocode = $this->getGeocode($address)) === false)
@@ -664,13 +673,15 @@ class GoogleMapAPI {
 
     /**
      * adds a map marker by geocode
-     * 
+     *
      * @param string $lon the map longitude (horizontal)
      * @param string $lat the map latitude (vertical)
      * @param string $title the title display in the sidebar
-     * @param string $html|array $html 
+     * @param string $html |array $html
      *     string: the HTML block to display in the info bubble (if empty, title is used)
-     *     array: The title => content pairs for a tabbed info bubble     
+     *     array: The title => content pairs for a tabbed info bubble
+     * @param string $tooltip
+     * @return int
      */
     // TODO make it so you can specify which tab you want the directions to appear in (add another arg)
     function addMarkerByCoords($lon,$lat,$title = '',$html = '',$tooltip = '') {
@@ -688,12 +699,13 @@ class GoogleMapAPI {
     /**
      * adds a map polyline by address
      * if color, weight and opacity are not defined, use the google maps defaults
-     * 
+     *
      * @param string $address1 the map address to draw from
      * @param string $address2 the map address to draw to
      * @param string $color the color of the line (format: #000000)
-     * @param string $weight the weight of the line in pixels
-     * @param string $opacity the line opacity (percentage)
+     * @param int|string $weight the weight of the line in pixels
+     * @param int|string $opacity the line opacity (percentage)
+     * @return bool|int
      */
     function addPolyLineByAddress($address1,$address2,$color='',$weight=0,$opacity=0) {
         if(($_geocode1 = $this->getGeocode($address1)) === false)
@@ -706,14 +718,15 @@ class GoogleMapAPI {
     /**
      * adds a map polyline by map coordinates
      * if color, weight and opacity are not defined, use the google maps defaults
-     * 
+     *
      * @param string $lon1 the map longitude to draw from
      * @param string $lat1 the map latitude to draw from
      * @param string $lon2 the map longitude to draw to
      * @param string $lat2 the map latitude to draw to
      * @param string $color the color of the line (format: #000000)
-     * @param string $weight the weight of the line in pixels
-     * @param string $opacity the line opacity (percentage)
+     * @param int|string $weight the weight of the line in pixels
+     * @param int|string $opacity the line opacity (percentage)
+     * @return int
      */
     function addPolyLineByCoords($lon1,$lat1,$lon2,$lat2,$color='',$weight=0,$opacity=0) {
         $_polyline['lon1'] = $lon1;
@@ -728,13 +741,14 @@ class GoogleMapAPI {
         $this->adjustCenterCoords($_polyline['lon2'],$_polyline['lat2']);
         // return index of polyline
         return count($this->_polylines) - 1;
-    }        
-        
+    }
+
     /**
      * adjust map center coordinates by the given lat/lon point
-     * 
+     *
      * @param string $lon the map latitude (horizontal)
      * @param string $lat the map latitude (vertical)
+     * @return bool
      */
     function adjustCenterCoords($lon,$lat) {
         if(strlen((string)$lon) == 0 || strlen((string)$lat) == 0)
@@ -758,12 +772,12 @@ class GoogleMapAPI {
     function setCenterCoords($lon,$lat) {
         $this->center_lat = (float) $lat;
         $this->center_lon = (float) $lon;
-    }    
+    }
 
     /**
      * generate an array of params for a new marker icon image
      * iconShadowImage is optional
-     * If anchor coords are not supplied, we use the center point of the image by default. 
+     * If anchor coords are not supplied, we use the center point of the image by default.
      * Can be called statically. For private use by addMarkerIcon() and setMarkerIcon()
      *
      * @param string $iconImage URL to icon image
@@ -772,6 +786,7 @@ class GoogleMapAPI {
      * @param string $iconAnchorY Y coordinate for icon anchor point
      * @param string $infoWindowAnchorX X coordinate for info window anchor point
      * @param string $infoWindowAnchorY Y coordinate for info window anchor point
+     * @return array
      */
     function createMarkerIcon($iconImage,$iconShadowImage = '',$iconAnchorX = 'x',$iconAnchorY = 'x',$infoWindowAnchorX = 'x',$infoWindowAnchorY = 'x') {
         $_icon_image_path = strpos($iconImage,'http') === 0 ? $iconImage : $_SERVER['DOCUMENT_ROOT'] . $iconImage;
@@ -814,16 +829,29 @@ class GoogleMapAPI {
         }
         return $icon_info;
     }
-    
+
     /**
      * set the marker icon for ALL markers on the map
+     * @param $iconImage
+     * @param string $iconShadowImage
+     * @param string $iconAnchorX
+     * @param string $iconAnchorY
+     * @param string $infoWindowAnchorX
+     * @param string $infoWindowAnchorY
      */
     function setMarkerIcon($iconImage,$iconShadowImage = '',$iconAnchorX = 'x',$iconAnchorY = 'x',$infoWindowAnchorX = 'x',$infoWindowAnchorY = 'x') {
         $this->_icons = array($this->createMarkerIcon($iconImage,$iconShadowImage,$iconAnchorX,$iconAnchorY,$infoWindowAnchorX,$infoWindowAnchorY));
     }
-    
+
     /**
      * add an icon to go with the correspondingly added marker
+     * @param $iconImage
+     * @param string $iconShadowImage
+     * @param string $iconAnchorX
+     * @param string $iconAnchorY
+     * @param string $infoWindowAnchorX
+     * @param string $infoWindowAnchorY
+     * @return int
      */
     function addMarkerIcon($iconImage,$iconShadowImage = '',$iconAnchorX = 'x',$iconAnchorY = 'x',$infoWindowAnchorX = 'x',$infoWindowAnchorY = 'x') {
         $this->_icons[] = $this->createMarkerIcon($iconImage,$iconShadowImage,$iconAnchorX,$iconAnchorY,$infoWindowAnchorX,$infoWindowAnchorY);
@@ -1099,21 +1127,7 @@ class GoogleMapAPI {
             $_output .= 'var tabFlag = isArray(html);' . "\n";
             $_output .= 'if(!tabFlag) { html = [{"contentElem": html}]; }' . "\n";
             $_output .= sprintf(
-                     "to_htmls[counter] = html[0].contentElem + '<form class=\"gmapDir\" id=\"gmapDirTo\" style=\"white-space: nowrap;\" action=\"http://maps.google.com/maps\" method=\"get\" target=\"_blank\">' +
-                     '<span class=\"gmapDirHead\" id=\"gmapDirHeadTo\">%s<strong>%s</strong> - <a href=\"javascript:fromhere(' + counter + ')\">%s</a></span>' +
-                     '<p class=\"gmapDirItem\" id=\"gmapDirItemTo\"><label for=\"gmapDirSaddr\" class=\"gmapDirLabel\" id=\"gmapDirLabelTo\">%s<br /></label>' +
-                     '<input type=\"text\" size=\"40\" maxlength=\"40\" name=\"saddr\" class=\"gmapTextBox\" id=\"gmapDirSaddr\" value=\"\" onfocus=\"this.style.backgroundColor = \'#e0e0e0\';\" onblur=\"this.style.backgroundColor = \'#ffffff\';\" />' +
-                     '<span class=\"gmapDirBtns\" id=\"gmapDirBtnsTo\"><input value=\"%s\" type=\"%s\" class=\"gmapDirButton\" id=\"gmapDirButtonTo\" /></span></p>' +
-                     '<input type=\"hidden\" name=\"daddr\" value=\"' +
-                     point.y + ',' + point.x + \"(\" + title.replace(new RegExp(/\"/g),'&quot;') + \")\" + '\" /></form>';
-                      from_htmls[counter] = html[0].contentElem + '<p /><form class=\"gmapDir\" id=\"gmapDirFrom\" style=\"white-space: nowrap;\" action=\"http://maps.google.com/maps\" method=\"get\" target=\"_blank\">' +
-                     '<span class=\"gmapDirHead\" id=\"gmapDirHeadFrom\">%s<a href=\"javascript:tohere(' + counter + ')\">%s</a> - <strong>%s</strong></span>' +
-                     '<p class=\"gmapDirItem\" id=\"gmapDirItemFrom\"><label for=\"gmapDirSaddr\" class=\"gmapDirLabel\" id=\"gmapDirLabelFrom\">%s<br /></label>' +
-                     '<input type=\"text\" size=\"40\" maxlength=\"40\" name=\"daddr\" class=\"gmapTextBox\" id=\"gmapDirSaddr\" value=\"\" onfocus=\"this.style.backgroundColor = \'#e0e0e0\';\" onblur=\"this.style.backgroundColor = \'#ffffff\';\" />' +
-                     '<span class=\"gmapDirBtns\" id=\"gmapDirBtnsFrom\"><input value=\"%s\" type=\"%s\" class=\"gmapDirButton\" id=\"gmapDirButtonFrom\" /></span></p>' +
-                     '<input type=\"hidden\" name=\"saddr\" value=\"' +
-                     point.y + ',' + point.x + encodeURIComponent(\"(\" + title.replace(new RegExp(/\"/g),'&quot;') + \")\") + '\" /></form>';
-                     html[0].contentElem = html[0].contentElem + '<p /><div id=\"gmapDirHead\" class=\"gmapDir\" style=\"white-space: nowrap;\">%s<a href=\"javascript:tohere(' + counter + ')\">%s</a> - <a href=\"javascript:fromhere(' + counter + ')\">%s</a></div>';\n",
+                     ",
                      $this->driving_dir_text['dir_text'],
                      $this->driving_dir_text['dir_tohere'],
                      $this->driving_dir_text['dir_fromhere'],
@@ -1352,6 +1366,7 @@ class GoogleMapAPI {
      * @param float $lon1
      * @param float $lon2
      * @param float $unit   M=miles, K=kilometers, N=nautical miles, I=inches, F=feet
+     * @return float
      */
     function geoGetDistance($lat1,$lon1,$lat2,$lon2,$unit='M') {
         

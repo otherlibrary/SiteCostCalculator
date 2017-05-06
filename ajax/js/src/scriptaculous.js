@@ -30,9 +30,9 @@ var Scriptaculous = {
     document.write('<script type="text/javascript" src="'+libraryName+'"></script>');
   },
   load: function() {
-    if((typeof Prototype=='undefined') || 
-       (typeof Element == 'undefined') || 
-       (typeof Element.Methods=='undefined') ||
+    if((typeof Prototype==='undefined') ||
+       (typeof Element === 'undefined') ||
+       (typeof Element.Methods==='undefined') ||
        parseFloat(Prototype.Version.split(".")[0] + "." +
                   Prototype.Version.split(".")[1]) < 1.5)
        throw("script.aculo.us requires the Prototype JavaScript framework >= 1.5.0");
@@ -46,6 +46,6 @@ var Scriptaculous = {
        function(include) { Scriptaculous.require(path+include+'.js') });
     });
   }
-}
+};
 
 Scriptaculous.load();

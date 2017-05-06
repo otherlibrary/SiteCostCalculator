@@ -133,10 +133,9 @@ class Net_URL2
     /**
      * Constructor.
      *
-     * @param string $url     an absolute or relative URL
-     * @param array  $options an array of OPTION_xxx constants
+     * @param string $url an absolute or relative URL
+     * @param array $options an array of OPTION_xxx constants
      *
-     * @return $this
      * @uses   self::parseUrl()
      */
     public function __construct($url, array $options = array())
@@ -676,8 +675,8 @@ class Net_URL2
      * this URL.
      *
      * @param Net_URL2|string $reference relative URL
-     *
      * @return Net_URL2
+     * @throws Exception
      */
     public function resolve($reference)
     {
@@ -797,8 +796,9 @@ class Net_URL2
      * Similar to PHP's rawurlencode(), except that it also encodes ~ in PHP
      * 5.2.x and earlier.
      *
-     * @param  $raw the string to encode
+     * @param $string
      * @return string
+     * @internal param the $raw string to encode
      */
     public static function urlencode($string)
     {
@@ -812,8 +812,8 @@ class Net_URL2
     /**
      * Returns a Net_URL2 instance representing the canonical URL of the
      * currently executing PHP script.
-     *
-     * @return  string
+     * @return string
+     * @throws Exception
      */
     public static function getCanonical()
     {
@@ -848,8 +848,8 @@ class Net_URL2
     /**
      * Returns a Net_URL2 instance representing the URL used to retrieve the
      * current request.
-     *
-     * @return  Net_URL2
+     * @return Net_URL2
+     * @throws Exception
      */
     public static function getRequested()
     {
@@ -883,12 +883,12 @@ class Net_URL2
      * A simple version of http_build_query in userland. The encoded string is
      * percentage encoded according to RFC 3986.
      *
-     * @param array  $data      An array, which has to be converted into
+     * @param array $data An array, which has to be converted into
      *                          QUERY_STRING. Anything is possible.
-     * @param string $seperator See {@link self::OPTION_SEPARATOR_OUTPUT}
-     * @param string $key       For stacked values (arrays in an array).
-     *
+     * @param $separator
+     * @param string $key For stacked values (arrays in an array).
      * @return string
+     * @internal param string $seperator See <a href='psi_element://self::OPTION_SEPARATOR_OUTPUT'>self::OPTION_SEPARATOR_OUTPUT</a>
      */
     protected function buildQuery(array $data, $separator, $key = null)
     {

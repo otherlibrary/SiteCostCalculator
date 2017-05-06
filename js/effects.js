@@ -13,30 +13,30 @@
 // returns self (or first argument) if not convertable
 String.prototype.parseColor = function() {
   var color = '#';
-  if (this.slice(0,4) == 'rgb(') {
+  if (this.slice(0,4) === 'rgb(') {
     var cols = this.slice(4,this.length-1).split(',');
     var i=0; do { color += parseInt(cols[i]).toColorPart() } while (++i<3);
   } else {
-    if (this.slice(0,1) == '#') {
-      if (this.length==4) for(var i=1;i<4;i++) color += (this.charAt(i) + this.charAt(i)).toLowerCase();
-      if (this.length==7) color = this.toLowerCase();
+    if (this.slice(0,1) === '#') {
+      if (this.length===4) for(var i=1; i<4; i++) color += (this.charAt(i) + this.charAt(i)).toLowerCase();
+      if (this.length===7) color = this.toLowerCase();
     }
   }
-  return (color.length==7 ? color : (arguments[0] || this));
+  return (color.length===7 ? color : (arguments[0] || this));
 };
 
 /*--------------------------------------------------------------------------*/
 
 Element.collectTextNodes = function(element) {
   return $A($(element).childNodes).collect( function(node) {
-    return (node.nodeType==3 ? node.nodeValue :
+    return (node.nodeType===3 ? node.nodeValue :
       (node.hasChildNodes() ? Element.collectTextNodes(node) : ''));
   }).flatten().join('');
 };
 
 Element.collectTextNodesIgnoreClass = function(element, className) {
   return $A($(element).childNodes).collect( function(node) {
-    return (node.nodeType==3 ? node.nodeValue :
+    return (node.nodeType===3 ? node.nodeValue :
       ((node.hasChildNodes() && !Element.hasClassName(node,className)) ?
         Element.collectTextNodesIgnoreClass(node, className) : ''));
   }).flatten().join('');
@@ -112,11 +112,11 @@ var Effect = {
 
     element = $(element);
     $A(element.childNodes).each( function(child) {
-      if (child.nodeType==3) {
+      if (child.nodeType===3) {
         child.nodeValue.toArray().each( function(character) {
           element.insertBefore(
             new Element('span', {style: tagifyStyle}).update(
-              character == ' ' ? String.fromCharCode(160) : character),
+              character === ' ' ? String.fromCharCode(160) : character),
               child);
         });
         Element.remove(child);
@@ -125,7 +125,7 @@ var Effect = {
   },
   multiple: function(element, effect) {
     var elements;
-    if (((typeof element == 'object') ||
+    if (((typeof element === 'object') ||
         Object.isFunction(element)) &&
        (element.length))
       elements = element;
@@ -178,7 +178,7 @@ Effect.ScopedQueue = Class.create(Enumerable, {
     switch(position) {
       case 'front':
         // move unstarted effects after this effect
-        this.effects.findAll(function(e){ return e.state=='idle' }).each( function(e) {
+        this.effects.findAll(function(e){ return e.state==='idle' }).each( function(e) {
             e.startOn  += effect.finishOn;
             e.finishOn += effect.finishOn;
           });
@@ -202,8 +202,8 @@ Effect.ScopedQueue = Class.create(Enumerable, {
       this.interval = setInterval(this.loop.bind(this), 15);
   },
   remove: function(effect) {
-    this.effects = this.effects.reject(function(e) { return e==effect });
-    if (this.effects.length == 0) {
+    this.effects = this.effects.reject(function(e) { return e===effect });
+    if (this.effects.length === 0) {
       clearInterval(this.interval);
       this.interval = null;
     }
@@ -328,7 +328,7 @@ Effect.Tween = Class.create(Effect.Base, {
   initialize: function(object, from, to) {
     object = Object.isString(object) ? $(object) : object;
     var args = $A(arguments), method = args.last(),
-      options = args.length == 5 ? args[3] : null;
+      options = args.length === 5 ? args[3] : null;
     this.method = Object.isFunction(method) ? method.bind(object) :
       Object.isFunction(object[method]) ? object[method].bind(object) :
       function(value) { object[method] = value };
@@ -379,7 +379,7 @@ Effect.Move = Class.create(Effect.Base, {
     this.element.makePositioned();
     this.originalLeft = parseFloat(this.element.getStyle('left') || '0');
     this.originalTop  = parseFloat(this.element.getStyle('top')  || '0');
-    if (this.options.mode == 'absolute') {
+    if (this.options.mode === 'absolute') {
       this.options.x = this.options.x - this.originalLeft;
       this.options.y = this.options.y - this.originalTop;
     }
@@ -436,7 +436,7 @@ Effect.Scale = Class.create(Effect.Base, {
     this.factor = (this.options.scaleTo - this.options.scaleFrom)/100;
 
     this.dims = null;
-    if (this.options.scaleMode=='box')
+    if (this.options.scaleMode==='box')
       this.dims = [this.element.offsetHeight, this.element.offsetWidth];
     if (/^content/.test(this.options.scaleMode))
       this.dims = [this.element.scrollHeight, this.element.scrollWidth];
@@ -460,7 +460,7 @@ Effect.Scale = Class.create(Effect.Base, {
     if (this.options.scaleFromCenter) {
       var topd  = (height - this.dims[0])/2;
       var leftd = (width  - this.dims[1])/2;
-      if (this.elementPositioning == 'absolute') {
+      if (this.elementPositioning === 'absolute') {
         if (this.options.scaleY) d.top = this.originalTop-topd + 'px';
         if (this.options.scaleX) d.left = this.originalLeft-leftd + 'px';
       } else {
@@ -481,7 +481,7 @@ Effect.Highlight = Class.create(Effect.Base, {
   },
   setup: function() {
     // Prevent executing on elements not in the layout flow
-    if (this.element.getStyle('display')=='none') { this.cancel(); return; }
+    if (this.element.getStyle('display')==='none') { this.cancel(); return; }
     // Disable background image during the effect
     this.oldStyle = { };
     if (!this.options.keepBackgroundImage) {
@@ -531,7 +531,7 @@ Effect.Fade = function(element) {
     from: element.getOpacity() || 1.0,
     to:   0.0,
     afterFinishInternal: function(effect) {
-      if (effect.options.to!=0) return;
+      if (effect.options.to!==0) return;
       effect.element.hide().setStyle({opacity: oldOpacity});
     }
   }, arguments[1] || { });
@@ -541,7 +541,7 @@ Effect.Fade = function(element) {
 Effect.Appear = function(element) {
   element = $(element);
   var options = Object.extend({
-  from: (element.getStyle('display') == 'none' ? 0.0 : element.getOpacity() || 0.0),
+  from: (element.getStyle('display') === 'none' ? 0.0 : element.getOpacity() || 0.0),
   to:   1.0,
   // force Safari to render floated elements properly
   afterFinishInternal: function(effect) {
@@ -930,7 +930,7 @@ Effect.Morph = Class.create(Effect.Base, {
         this.element.removeClassName(options.style);
         var css = this.element.getStyles();
         this.style = this.style.reject(function(style) {
-          return style.value == css[style.key];
+          return style.value === css[style.key];
         });
         options.afterFinishInternal = function(effect) {
           effect.element.addClassName(effect.options.style);
@@ -954,31 +954,31 @@ Effect.Morph = Class.create(Effect.Base, {
     this.transforms = this.style.map(function(pair){
       var property = pair[0], value = pair[1], unit = null;
 
-      if (value.parseColor('#zzzzzz') != '#zzzzzz') {
+      if (value.parseColor('#zzzzzz') !== '#zzzzzz') {
         value = value.parseColor();
         unit  = 'color';
-      } else if (property == 'opacity') {
+      } else if (property === 'opacity') {
         value = parseFloat(value);
         if (Prototype.Browser.IE && (!this.element.currentStyle.hasLayout))
           this.element.setStyle({zoom: 1});
       } else if (Element.CSS_LENGTH.test(value)) {
           var components = value.match(/^([\+\-]?[0-9\.]+)(.*)$/);
           value = parseFloat(components[1]);
-          unit = (components.length == 3) ? components[2] : null;
+          unit = (components.length === 3) ? components[2] : null;
       }
 
       var originalValue = this.element.getStyle(property);
       return {
         style: property.camelize(),
-        originalValue: unit=='color' ? parseColor(originalValue) : parseFloat(originalValue || 0),
-        targetValue: unit=='color' ? parseColor(value) : value,
+        originalValue: unit==='color' ? parseColor(originalValue) : parseFloat(originalValue || 0),
+        targetValue: unit==='color' ? parseColor(value) : value,
         unit: unit
       };
     }.bind(this)).reject(function(transform){
       return (
-        (transform.originalValue == transform.targetValue) ||
+        (transform.originalValue === transform.targetValue) ||
         (
-          transform.unit != 'color' &&
+          transform.unit !== 'color' &&
           (isNaN(transform.originalValue) || isNaN(transform.targetValue))
         )
       );
@@ -988,7 +988,7 @@ Effect.Morph = Class.create(Effect.Base, {
     var style = { }, transform, i = this.transforms.length;
     while(i--)
       style[(transform = this.transforms[i]).style] =
-        transform.unit=='color' ? '#'+
+        transform.unit==='color' ? '#'+
           (Math.round(transform.originalValue[0]+
             (transform.targetValue[0]-transform.originalValue[0])*position)).toColorPart() +
           (Math.round(transform.originalValue[1]+

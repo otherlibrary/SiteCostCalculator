@@ -198,6 +198,7 @@ function recaptcha_check_answer ($privkey, $remoteip, $challenge, $response, $ex
  * using this function.
  * @param string $domain The domain where the page is hosted
  * @param string $appname The name of your application
+ * @return string
  */
 function recaptcha_get_signup_url ($domain = null, $appname = null) {
 	return "https://www.google.com/recaptcha/admin/create?" .  _recaptcha_qsencode (array ('domains' => $domain, 'app' => $appname));
@@ -244,6 +245,8 @@ function recaptcha_mailhide_url($pubkey, $privkey, $email) {
  * gets the parts of the email to expose to the user.
  * eg, given johndoe@example,com return ["john", "example.com"].
  * the email is then displayed as john...@example.com
+ * @param $email
+ * @return array
  */
 function _recaptcha_mailhide_email_parts ($email) {
 	$arr = preg_split("/@/", $email );
@@ -263,6 +266,10 @@ function _recaptcha_mailhide_email_parts ($email) {
  * to get a key, go to:
  *
  * http://www.google.com/recaptcha/mailhide/apikey
+ * @param $pubkey
+ * @param $privkey
+ * @param $email
+ * @return string
  */
 function recaptcha_mailhide_html($pubkey, $privkey, $email) {
 	$emailparts = _recaptcha_mailhide_email_parts ($email);

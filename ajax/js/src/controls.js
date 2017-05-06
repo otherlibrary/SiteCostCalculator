@@ -36,10 +36,10 @@
 // useful when one of the tokens is \n (a newline), as it 
 // allows smart autocompletion after linebreaks.
 
-if(typeof Effect == 'undefined')
+if(typeof Effect === 'undefined')
   throw("controls.js requires including script.aculo.us' effects.js library");
 
-var Autocompleter = {}
+var Autocompleter = {};
 Autocompleter.Base = function() {};
 Autocompleter.Base.prototype = {
   baseInitialize: function(element, update, options) {
@@ -62,7 +62,7 @@ Autocompleter.Base.prototype = {
     this.options.minChars     = this.options.minChars || 1;
     this.options.onShow       = this.options.onShow || 
       function(element, update){ 
-        if(!update.style.position || update.style.position=='absolute') {
+        if(!update.style.position || update.style.position==='absolute') {
           update.style.position = 'absolute';
           Position.clone(element, update, {
             setHeight: false, 
@@ -74,7 +74,7 @@ Autocompleter.Base.prototype = {
     this.options.onHide = this.options.onHide || 
       function(element, update){ new Effect.Fade(update,{duration:0.15}) };
 
-    if(typeof(this.options.tokens) == 'string') 
+    if(typeof(this.options.tokens) === 'string')
       this.options.tokens = new Array(this.options.tokens);
 
     this.observer = null;
@@ -88,11 +88,11 @@ Autocompleter.Base.prototype = {
   },
 
   show: function() {
-    if(Element.getStyle(this.update, 'display')=='none') this.options.onShow(this.element, this.update);
+    if(Element.getStyle(this.update, 'display')==='none') this.options.onShow(this.element, this.update);
     if(!this.iefix && 
       (navigator.appVersion.indexOf('MSIE')>0) &&
       (navigator.userAgent.indexOf('Opera')<0) &&
-      (Element.getStyle(this.update, 'position')=='absolute')) {
+      (Element.getStyle(this.update, 'position')==='absolute')) {
       new Insertion.After(this.update, 
        '<iframe id="' + this.update.id + '_iefix" '+
        'style="display:none;position:absolute;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);" ' +
@@ -111,7 +111,7 @@ Autocompleter.Base.prototype = {
 
   hide: function() {
     this.stopIndicator();
-    if(Element.getStyle(this.update, 'display')!='none') this.options.onHide(this.element, this.update);
+    if(Element.getStyle(this.update, 'display')!=='none') this.options.onHide(this.element, this.update);
     if(this.iefix) Element.hide(this.iefix);
   },
 
@@ -150,8 +150,8 @@ Autocompleter.Base.prototype = {
          return;
       }
      else 
-       if(event.keyCode==Event.KEY_TAB || event.keyCode==Event.KEY_RETURN || 
-         (navigator.appVersion.indexOf('AppleWebKit') > 0 && event.keyCode == 0)) return;
+       if(event.keyCode===Event.KEY_TAB || event.keyCode===Event.KEY_RETURN ||
+         (navigator.appVersion.indexOf('AppleWebKit') > 0 && event.keyCode === 0)) return;
 
     this.changed = true;
     this.hasFocus = true;
@@ -169,7 +169,7 @@ Autocompleter.Base.prototype = {
 
   onHover: function(event) {
     var element = Event.findElement(event, 'LI');
-    if(this.index != element.autocompleteIndex) 
+    if(this.index !== element.autocompleteIndex)
     {
         this.index = element.autocompleteIndex;
         this.render();
@@ -194,7 +194,7 @@ Autocompleter.Base.prototype = {
   render: function() {
     if(this.entryCount > 0) {
       for (var i = 0; i < this.entryCount; i++)
-        this.index==i ? 
+        this.index===i ?
           Element.addClassName(this.getEntry(i),"selected") : 
           Element.removeClassName(this.getEntry(i),"selected");
         
@@ -209,13 +209,13 @@ Autocompleter.Base.prototype = {
   },
   
   markPrevious: function() {
-    if(this.index > 0) this.index--
+    if(this.index > 0) this.index--;
       else this.index = this.entryCount-1;
     this.getEntry(this.index).scrollIntoView(true);
   },
   
   markNext: function() {
-    if(this.index < this.entryCount-1) this.index++
+    if(this.index < this.entryCount-1) this.index++;
       else this.index = 0;
     this.getEntry(this.index).scrollIntoView(false);
   },
@@ -246,7 +246,7 @@ Autocompleter.Base.prototype = {
       value = Element.collectTextNodesIgnoreClass(selectedElement, 'informal');
     
     var lastTokenPos = this.findLastToken();
-    if (lastTokenPos != -1) {
+    if (lastTokenPos !== -1) {
       var newValue = this.element.value.substr(0, lastTokenPos + 1);
       var whitespace = this.element.value.substr(lastTokenPos + 1).match(/^\s+/);
       if (whitespace)
@@ -282,7 +282,7 @@ Autocompleter.Base.prototype = {
       this.stopIndicator();
       this.index = 0;
       
-      if(this.entryCount==1 && this.options.autoSelect) {
+      if(this.entryCount===1 && this.options.autoSelect) {
         this.selectEntry();
         this.hide();
       } else {
@@ -309,7 +309,7 @@ Autocompleter.Base.prototype = {
 
   getToken: function() {
     var tokenPos = this.findLastToken();
-    if (tokenPos != -1)
+    if (tokenPos !== -1)
       var ret = this.element.value.substr(tokenPos + 1).replace(/^\s+/,'').replace(/\s+$/,'');
     else
       var ret = this.element.value;
@@ -327,7 +327,7 @@ Autocompleter.Base.prototype = {
     }
     return lastTokenPos;
   }
-}
+};
 
 Ajax.Autocompleter = Class.create();
 Object.extend(Object.extend(Ajax.Autocompleter.prototype, Autocompleter.Base.prototype), {
@@ -425,13 +425,13 @@ Autocompleter.Local.prototype = Object.extend(new Autocompleter.Base(), {
             elem.toLowerCase().indexOf(entry.toLowerCase()) : 
             elem.indexOf(entry);
 
-          while (foundPos != -1) {
-            if (foundPos == 0 && elem.length != entry.length) { 
+          while (foundPos !== -1) {
+            if (foundPos === 0 && elem.length !== entry.length) {
               ret.push("<li><strong>" + elem.substr(0, entry.length) + "</strong>" + 
                 elem.substr(entry.length) + "</li>");
               break;
             } else if (entry.length >= instance.options.partialChars && 
-              instance.options.partialSearch && foundPos != -1) {
+              instance.options.partialSearch && foundPos !== -1) {
               if (instance.options.fullSearch || /\s/.test(elem.substr(foundPos-1,1))) {
                 partial.push("<li>" + elem.substr(0, foundPos) + "<strong>" +
                   elem.substr(foundPos, entry.length) + "</strong>" + elem.substr(
@@ -447,7 +447,7 @@ Autocompleter.Local.prototype = Object.extend(new Autocompleter.Base(), {
           }
         }
         if (partial.length)
-          ret = ret.concat(partial.slice(0, instance.options.choices - ret.length))
+          ret = ret.concat(partial.slice(0, instance.options.choices - ret.length));
         return "<ul>" + ret.join('') + "</ul>";
       }
     }, options || {});
@@ -465,7 +465,7 @@ Field.scrollFreeActivate = function(field) {
   setTimeout(function() {
     Field.activate(field);
   }, 1);
-}
+};
 
 Ajax.InPlaceEditor = Class.create();
 Ajax.InPlaceEditor.defaultHighlightColor = "#FFFF99";
@@ -557,7 +557,7 @@ Ajax.InPlaceEditor.prototype = {
   createForm: function() {
     this.form = document.createElement("form");
     this.form.id = this.options.formId;
-    Element.addClassName(this.form, this.options.formClassName)
+    Element.addClassName(this.form, this.options.formClassName);
     this.form.onsubmit = this.onSubmit.bind(this);
 
     this.createEditField();
@@ -601,7 +601,7 @@ Ajax.InPlaceEditor.prototype = {
 
     var obj = this;
     
-    if (this.options.rows == 1 && !this.hasHTMLLineBreaks(text)) {
+    if (this.options.rows === 1 && !this.hasHTMLLineBreaks(text)) {
       this.options.textarea = false;
       var textField = document.createElement("input");
       textField.obj = this;
@@ -611,7 +611,7 @@ Ajax.InPlaceEditor.prototype = {
       textField.style.backgroundColor = this.options.highlightcolor;
       textField.className = 'editor_field';
       var size = this.options.size || this.options.cols || 0;
-      if (size != 0) textField.size = size;
+      if (size !== 0) textField.size = size;
       if (this.options.submitOnBlur)
         textField.onblur = this.onSubmit.bind(this);
       this.editField = textField;
@@ -734,7 +734,7 @@ Ajax.InPlaceEditor.prototype = {
     if (this.options.backgroundColor) {
       this.element.style.backgroundColor = this.oldBackground;
     }
-    Element.removeClassName(this.element, this.options.hoverClassName)
+    Element.removeClassName(this.element, this.options.hoverClassName);
     if (this.saving) return;
     this.effect = new Effect.Highlight(this.element, {
       startcolor: this.options.highlightcolor,
@@ -789,9 +789,9 @@ Object.extend(Ajax.InPlaceCollectionEditor.prototype, {
       collection.each(function(e,i) {
         optionTag = document.createElement("option");
         optionTag.value = (e instanceof Array) ? e[0] : e;
-        if((typeof this.options.value == 'undefined') && 
-          ((e instanceof Array) ? this.element.innerHTML == e[1] : e == optionTag.value)) optionTag.selected = true;
-        if(this.options.value==optionTag.value) optionTag.selected = true;
+        if((typeof this.options.value === 'undefined') &&
+          ((e instanceof Array) ? this.element.innerHTML === e[1] : e === optionTag.value)) optionTag.selected = true;
+        if(this.options.value===optionTag.value) optionTag.selected = true;
         optionTag.appendChild(document.createTextNode((e instanceof Array) ? e[1] : e));
         selectTag.appendChild(optionTag);
       }.bind(this));
@@ -822,7 +822,7 @@ Form.Element.DelayedObserver.prototype = {
     Event.observe(this.element,'keyup',this.delayedListener.bindAsEventListener(this));
   },
   delayedListener: function(event) {
-    if(this.lastValue == $F(this.element)) return;
+    if(this.lastValue === $F(this.element)) return;
     if(this.timer) clearTimeout(this.timer);
     this.timer = setTimeout(this.onTimerEvent.bind(this), this.delay * 1000);
     this.lastValue = $F(this.element);
