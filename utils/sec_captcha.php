@@ -36,7 +36,7 @@ function ap_showWaitMessage(div,flag) {
 if (!DHTML)
 return;
 var x = ap_getObj(div);
-x.visibility = (flag) ? 'visible':'hidden'
+x.visibility = (flag) ? 'visible':'hidden';
 if(! document.getElementById)
 if(document.layers)
 x.left=280/2;
@@ -82,7 +82,7 @@ ap_showWaitMessage('waitDiv', 1);
 			            <div class="calculate_box_centre">
 			<div class="search_info">
 			<div class="search_input1"><input type="text" name="url" style="width:950px;height:40px;background-color:#dcf9bb;border:1px solid #b4b4b4;font-family:Arial, Helvetica, sans-serif;font-size:20px;padding-top:12px;font-weight:bold;padding-left:5px;color:#555555;" /></div>
-				<span style="font-family:Arial, Helvetica, sans-serif;font-size:20px;font-weight:bold;color:#a1a1a1;float:left; width:900px;border:0px solid; text-align:center;">
+				<span style="font-family:Arial, Helvetica, sans-serif;font-size:20px;font-weight:bold;color:#a1a1a1;float:left; width:900px;border:0 solid; text-align:center;">
                 Eg www.google.com or http://www.youtube.com</span> 
 				<div class="calculate_button1"><input type="submit" style="float:left;background-image:url(../images/calculate_big.gif);width:250px;height:41px;border:1px solid #c1c1c1;font-size:16px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;color:#FFFFFF" value="Calculate&amp;Info" /></div>
 				</div>

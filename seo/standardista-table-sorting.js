@@ -81,7 +81,7 @@ var standardistaTableSorting = {
 		}
 		
 		// if this table does not have a thead, we don't want to know about it
-		if (!table.tHead || !table.tHead.rows || 0 == table.tHead.rows.length) {
+		if (!table.tHead || !table.tHead.rows || 0 === table.tHead.rows.length) {
 			return;
 		}
 		
@@ -162,9 +162,9 @@ var standardistaTableSorting = {
 		// but just getting the first cell is no good if it contains no data
 		// so if the first cell just contains white space then we need to track
 		// down until we find a cell which does contain some actual data
-		var itm = ''
+		var itm = '';
 		var rowNum = 0;
-		while ('' == itm && rowNum < table.tBodies[0].rows.length) {
+		while ('' === itm && rowNum < table.tBodies[0].rows.length) {
 			itm = that.getInnerText(table.tBodies[0].rows[rowNum].cells[column]);
 			rowNum++;
 		}
@@ -172,7 +172,7 @@ var standardistaTableSorting = {
 
 		// if the last column that was sorted was this one, then all we need to 
 		// do is reverse the sorting on this column
-		if (table.id == that.lastSortedTable && column == that.sortColumnIndex) {
+		if (table.id === that.lastSortedTable && column === that.sortColumnIndex) {
 			newRows = that.newRows;
 			newRows.reverse();
 		// otherwise, we have to do the full sort
@@ -199,7 +199,7 @@ var standardistaTableSorting = {
 			var arrowParent = arrows[j].parentNode;
 			arrowParent.removeChild(arrows[j]);
 
-			if (arrowParent != td) {
+			if (arrowParent !== td) {
 				spanEl = createElement('span');
 				spanEl.className = 'tableSortArrow';
 				spanEl.appendChild(document.createTextNode('\u00A0\u00A0'));
@@ -210,7 +210,7 @@ var standardistaTableSorting = {
 		// now, add back in some feedback 
 		var spanEl = createElement('span');
 		spanEl.className = 'tableSortArrow';
-		if (null == previousSortOrder || '' == previousSortOrder || 'DESC' == previousSortOrder) {
+		if (null === previousSortOrder || '' === previousSortOrder || 'DESC' === previousSortOrder) {
 			spanEl.appendChild(document.createTextNode(' \u2191'));
 			spanEl.setAttribute('sortOrder', 'ASC');
 		} else {
@@ -225,7 +225,7 @@ var standardistaTableSorting = {
 
 	getInnerText : function(el) {
 		
-		if ('string' == typeof el || 'undefined' == typeof el) {
+		if ('string' === typeof el || 'undefined' === typeof el) {
 			return el;
 		}
 		
@@ -234,7 +234,7 @@ var standardistaTableSorting = {
 		}
 
 		var str = el.getAttribute('standardistaTableSortingInnerText');
-		if (null != str && '' != str) {
+		if (null !== str && '' !== str) {
 			return str;
 		}
 		str = '';
@@ -245,10 +245,10 @@ var standardistaTableSorting = {
 			// 'if' is considerably quicker than a 'switch' statement, 
 			// in Internet Explorer which translates up to a good time 
 			// reduction since this is a very often called recursive function
-			if (1 == cs[i].nodeType) { // ELEMENT NODE
+			if (1 === cs[i].nodeType) { // ELEMENT NODE
 				str += this.getInnerText(cs[i]);
 				break;
-			} else if (3 == cs[i].nodeType) { //TEXT_NODE
+			} else if (3 === cs[i].nodeType) { //TEXT_NODE
 				str += cs[i].nodeValue;
 				break;
 			}
@@ -293,7 +293,7 @@ var standardistaTableSorting = {
 		
 		var aa = that.getInnerText(a.cells[that.sortColumnIndex]).toLowerCase();
 		var bb = that.getInnerText(b.cells[that.sortColumnIndex]).toLowerCase();
-		if (aa==bb) {
+		if (aa===bb) {
 			return 0;
 		} else if (aa<bb) {
 			return -1;
@@ -311,7 +311,7 @@ var standardistaTableSorting = {
 		
 		var dt1, dt2, yr = -1;
 		
-		if (aa.length == 10) {
+		if (aa.length === 10) {
 			dt1 = aa.substr(6,4)+aa.substr(3,2)+aa.substr(0,2);
 		} else {
 			yr = aa.substr(6,2);
@@ -323,7 +323,7 @@ var standardistaTableSorting = {
 			dt1 = yr+aa.substr(3,2)+aa.substr(0,2);
 		}
 		
-		if (bb.length == 10) {
+		if (bb.length === 10) {
 			dt2 = bb.substr(6,4)+bb.substr(3,2)+bb.substr(0,2);
 		} else {
 			yr = bb.substr(6,2);
@@ -335,7 +335,7 @@ var standardistaTableSorting = {
 			dt2 = yr+bb.substr(3,2)+bb.substr(0,2);
 		}
 		
-		if (dt1==dt2) {
+		if (dt1===dt2) {
 			return 0;
 		} else if (dt1<dt2) {
 			return -1;
@@ -387,7 +387,7 @@ var standardistaTableSorting = {
 
 		var aa = that.makeStandardIPAddress(that.getInnerText(a.cells[that.sortColumnIndex]).toLowerCase());
 		var bb = that.makeStandardIPAddress(that.getInnerText(b.cells[that.sortColumnIndex]).toLowerCase());
-		if (aa==bb) {
+		if (aa===bb) {
 			return 0;
 		} else if (aa<bb) {
 			return -1;
@@ -419,10 +419,10 @@ var standardistaTableSorting = {
 		this.isOdd = !this.isOdd;
 	}
 
-}
+};
 
 function standardistaTableSortingInit() {
 	standardistaTableSorting.init();
 }
 
-addEvent(window, 'load', standardistaTableSortingInit)
+addEvent(window, 'load', standardistaTableSortingInit);

@@ -12,7 +12,7 @@ var Prototype = {
 
   Browser: (function(){
     var ua = navigator.userAgent;
-    var isOpera = Object.prototype.toString.call(window.opera) == '[object Opera]';
+    var isOpera = Object.prototype.toString.call(window.opera) === '[object Opera]';
     return {
       IE:             !!window.attachEvent && !isOpera,
       Opera:          isOpera,
@@ -91,8 +91,9 @@ var Class = (function() {
     return true;
   })();
 
-  function subclass() {};
-  function create() {
+  function subclass() {
+    }
+    function create() {
     var parent = null, properties = $A(arguments);
     if (Object.isFunction(properties[0]))
       parent = properties.shift();
@@ -126,16 +127,16 @@ var Class = (function() {
         properties = Object.keys(source);
 
     if (IS_DONTENUM_BUGGY) {
-      if (source.toString != Object.prototype.toString)
+      if (source.toString !== Object.prototype.toString)
         properties.push("toString");
-      if (source.valueOf != Object.prototype.valueOf)
+      if (source.valueOf !== Object.prototype.valueOf)
         properties.push("valueOf");
     }
 
     for (var i = 0, length = properties.length; i < length; i++) {
       var property = properties[i], value = source[property];
       if (ancestor && Object.isFunction(value) &&
-          value.argumentNames()[0] == "$super") {
+          value.argumentNames()[0] === "$super") {
         var method = value;
         value = (function(m) {
           return function() { return ancestor[m].apply(this, arguments); };
@@ -305,14 +306,14 @@ var Class = (function() {
   }
 
   function isElement(object) {
-    return !!(object && object.nodeType == 1);
+    return !!(object && object.nodeType === 1);
   }
 
   function isArray(object) {
     return _toString.call(object) === ARRAY_CLASS;
   }
 
-  var hasNativeIsArray = (typeof Array.isArray == 'function')
+  var hasNativeIsArray = (typeof Array.isArray === 'function')
     && Array.isArray([]) && !Array.isArray({});
 
   if (hasNativeIsArray) {
@@ -380,7 +381,7 @@ Object.extend(Function.prototype, (function() {
     var names = this.toString().match(/^[\s\(]*function[^(]*\(([^)]*)\)/)[1]
       .replace(/\/\/.*?[\r\n]|\/\*(?:.|[\r\n])*?\*\//g, '')
       .replace(/\s+/g, '').split(',');
-    return names.length == 1 && !names[0] ? [] : names;
+    return names.length === 1 && !names[0] ? [] : names;
   }
 
   function bind(context) {
@@ -519,7 +520,7 @@ var PeriodicalExecuter = Class.create({
 });
 Object.extend(String, {
   interpret: function(value) {
-    return value == null ? '' : String(value);
+    return value === null ? '' : String(value);
   },
   specialChar: {
     '\b': '\\b',
@@ -630,7 +631,7 @@ Object.extend(String.prototype, (function() {
         var key = decodeURIComponent(pair.shift()),
             value = pair.length > 1 ? pair.join('=') : pair[0];
 
-        if (value != undefined) value = decodeURIComponent(value);
+        if (value !== undefined) value = decodeURIComponent(value);
 
         if (key in hash) {
           if (!Object.isArray(hash[key])) hash[key] = [hash[key]];
@@ -734,7 +735,7 @@ Object.extend(String.prototype, (function() {
   }
 
   function empty() {
-    return this == '';
+    return this === '';
   }
 
   function blank() {
@@ -790,22 +791,22 @@ var Template = Class.create({
       object = object.toTemplateReplacements();
 
     return this.template.gsub(this.pattern, function(match) {
-      if (object == null) return (match[1] + '');
+      if (object === null) return (match[1] + '');
 
       var before = match[1] || '';
-      if (before == '\\') return match[2];
+      if (before === '\\') return match[2];
 
       var ctx = object, expr = match[3],
           pattern = /^([^.[]+|\[((?:.*?[^\\])?)\])(\.|\[|$)/;
 
       match = pattern.exec(expr);
-      if (match == null) return before;
+      if (match === null) return before;
 
-      while (match != null) {
+      while (match !== null) {
         var comp = match[1].startsWith('[') ? match[2].replace(/\\\\]/g, ']') : match[1];
         ctx = ctx[comp];
-        if (null == ctx || '' == match[3]) break;
-        expr = expr.substring('[' == match[3] ? match[1].length : match[0].length);
+        if (null === ctx || '' === match[3]) break;
+        expr = expr.substring('[' === match[3] ? match[1].length : match[0].length);
         match = pattern.exec(expr);
       }
 
@@ -825,7 +826,7 @@ var Enumerable = (function() {
         iterator.call(context, value, index++);
       });
     } catch (e) {
-      if (e != $break) throw e;
+      if (e !== $break) throw e;
     }
     return this;
   }
@@ -903,11 +904,11 @@ var Enumerable = (function() {
 
   function include(object) {
     if (Object.isFunction(this.indexOf))
-      if (this.indexOf(object) != -1) return true;
+      if (this.indexOf(object) !== -1) return true;
 
     var found = false;
     this.each(function(value) {
-      if (value == object) {
+      if (value === object) {
         found = true;
         throw $break;
       }
@@ -942,7 +943,7 @@ var Enumerable = (function() {
     var result;
     this.each(function(value, index) {
       value = iterator.call(context, value, index);
-      if (result == null || value >= result)
+      if (result === null || value >= result)
         result = value;
     });
     return result;
@@ -953,7 +954,7 @@ var Enumerable = (function() {
     var result;
     this.each(function(value, index) {
       value = iterator.call(context, value, index);
-      if (result == null || value < result)
+      if (result === null || value < result)
         result = value;
     });
     return result;
@@ -1108,7 +1109,7 @@ Array.from = $A;
 
   function compact() {
     return this.select(function(value) {
-      return value != null;
+      return value !== null;
     });
   }
 
@@ -1134,7 +1135,7 @@ Array.from = $A;
 
   function uniq(sorted) {
     return this.inject([], function(array, value, index) {
-      if (0 == index || (sorted ? array.last() != value : !array.include(value)))
+      if (0 === index || (sorted ? array.last() !== value : !array.include(value)))
         array.push(value);
       return array;
     });
@@ -1212,7 +1213,7 @@ Array.from = $A;
 
   var CONCAT_ARGUMENTS_BUGGY = (function() {
     return [].concat(arguments)[0][0] !== 1;
-  })(1,2)
+  })(1,2);
 
   if (CONCAT_ARGUMENTS_BUGGY) arrayProto.concat = concat;
 
@@ -1221,8 +1222,7 @@ Array.from = $A;
 })();
 function $H(object) {
   return new Hash(object);
-};
-
+}
 var Hash = Class.create(Enumerable, (function() {
   function initialize(object) {
     this._object = Object.isHash(object) ? object.toObject() : Object.clone(object);
@@ -1294,7 +1294,7 @@ var Hash = Class.create(Enumerable, (function() {
     return this.inject([], function(results, pair) {
       var key = encodeURIComponent(pair.key), values = pair.value;
 
-      if (values && typeof values == 'object') {
+      if (values && typeof values === 'object') {
         if (Object.isArray(values)) {
           var queryValues = [];
           for (var i = 0, len = values.length, value; i < len; i++) {
@@ -1526,7 +1526,7 @@ Ajax.Request = Class.create(Ajax.Base, {
       this.transport.onreadystatechange = this.onStateChange.bind(this);
       this.setRequestHeaders();
 
-      this.body = this.method == 'post' ? (this.options.postBody || params) : null;
+      this.body = this.method === 'post' ? (this.options.postBody || params) : null;
       this.transport.send(this.body);
 
       /* Force Firefox to handle ready state 4 for synchronous requests */
@@ -1541,7 +1541,7 @@ Ajax.Request = Class.create(Ajax.Base, {
 
   onStateChange: function() {
     var readyState = this.transport.readyState;
-    if (readyState > 1 && !((readyState == 4) && this._complete))
+    if (readyState > 1 && !((readyState === 4) && this._complete))
       this.respondToReadyState(this.transport.readyState);
   },
 
@@ -1552,7 +1552,7 @@ Ajax.Request = Class.create(Ajax.Base, {
       'Accept': 'text/javascript, text/html, application/xml, text/xml, */*'
     };
 
-    if (this.method == 'post') {
+    if (this.method === 'post') {
       headers['Content-type'] = this.options.contentType +
         (this.options.encoding ? '; charset=' + this.options.encoding : '');
 
@@ -1565,7 +1565,7 @@ Ajax.Request = Class.create(Ajax.Base, {
             headers['Connection'] = 'close';
     }
 
-    if (typeof this.options.requestHeaders == 'object') {
+    if (typeof this.options.requestHeaders === 'object') {
       var extras = this.options.requestHeaders;
 
       if (Object.isFunction(extras.push))
@@ -1581,7 +1581,7 @@ Ajax.Request = Class.create(Ajax.Base, {
 
   success: function() {
     var status = this.getStatus();
-    return !status || (status >= 200 && status < 300) || status == 304;
+    return !status || (status >= 200 && status < 300) || status === 304;
   },
 
   getStatus: function() {
@@ -1594,7 +1594,7 @@ Ajax.Request = Class.create(Ajax.Base, {
   respondToReadyState: function(readyState) {
     var state = Ajax.Request.Events[readyState], response = new Ajax.Response(this);
 
-    if (state == 'Complete') {
+    if (state === 'Complete') {
       try {
         this._complete = true;
         (this.options['on' + response.status]
@@ -1605,7 +1605,7 @@ Ajax.Request = Class.create(Ajax.Base, {
       }
 
       var contentType = response.getHeader('Content-type');
-      if (this.options.evalJS == 'force'
+      if (this.options.evalJS === 'force'
           || (this.options.evalJS && this.isSameOrigin() && contentType
           && contentType.match(/^\s*(text|application)\/(x-)?(java|ecma)script(;.*)?\s*$/i)))
         this.evalResponse();
@@ -1618,14 +1618,14 @@ Ajax.Request = Class.create(Ajax.Base, {
       this.dispatchException(e);
     }
 
-    if (state == 'Complete') {
+    if (state === 'Complete') {
       this.transport.onreadystatechange = Prototype.emptyFunction;
     }
   },
 
   isSameOrigin: function() {
     var m = this.url.match(/^\s*https?:\/\/[^\/]*/);
-    return !m || (m[0] == '#{protocol}//#{domain}#{port}'.interpolate({
+    return !m || (m[0] === '#{protocol}//#{domain}#{port}'.interpolate({
       protocol: location.protocol,
       domain: document.domain,
       port: location.port ? ':' + location.port : ''
@@ -1668,14 +1668,14 @@ Ajax.Response = Class.create({
     var transport  = this.transport  = request.transport,
         readyState = this.readyState = transport.readyState;
 
-    if ((readyState > 2 && !Prototype.Browser.IE) || readyState == 4) {
+    if ((readyState > 2 && !Prototype.Browser.IE) || readyState === 4) {
       this.status       = this.getStatus();
       this.statusText   = this.getStatusText();
       this.responseText = String.interpret(transport.responseText);
       this.headerJSON   = this._getHeaderJSON();
     }
 
-    if (readyState == 4) {
+    if (readyState === 4) {
       var xml = transport.responseXML;
       this.responseXML  = Object.isUndefined(xml) ? null : xml;
       this.responseJSON = this._getResponseJSON();
@@ -1724,7 +1724,7 @@ Ajax.Response = Class.create({
 
   _getResponseJSON: function() {
     var options = this.request.options;
-    if (!options.evalJSON || (options.evalJSON != 'force' &&
+    if (!options.evalJSON || (options.evalJSON !== 'force' &&
       !(this.getHeader('Content-type') || '').include('application/json')) ||
         this.responseText.blank())
           return null;
@@ -1801,7 +1801,7 @@ Ajax.PeriodicalUpdater = Class.create(Ajax.Base, {
 
   updateComplete: function(response) {
     if (this.options.decay) {
-      this.decay = (response.responseText == this.lastText ?
+      this.decay = (response.responseText === this.lastText ?
         this.decay * this.options.decay : 1);
 
       this.lastText = response.responseText;
@@ -1863,8 +1863,8 @@ if (!Node.ELEMENT_NODE) {
 (function(global) {
   function shouldUseCache(tagName, attributes) {
     if (tagName === 'select') return false;
-    if ('type' in attributes) return false;
-    return true;
+    return !('type' in attributes);
+
   }
 
   var HAS_EXTENDED_CREATE_ELEMENT_SYNTAX = (function(){
@@ -1913,11 +1913,11 @@ Element._purgeElement = function(element) {
     element._prototypeUID = void 0;
     delete Element.Storage[uid];
   }
-}
+};
 
 Element.Methods = {
   visible: function(element) {
-    return $(element).style.display != 'none';
+    return $(element).style.display !== 'none';
   },
 
   toggle: function(element) {
@@ -1962,7 +1962,7 @@ Element.Methods = {
         var el = document.createElement("table");
         if (el && el.tBodies) {
           el.innerHTML = "<tbody><translate><td>test</td></translate></tbody>";
-          var isBuggy = typeof el.tBodies[0] == "undefined";
+          var isBuggy = typeof el.tBodies[0] === "undefined";
           el = null;
           return isBuggy;
         }
@@ -2091,12 +2091,12 @@ Element.Methods = {
 
       content = Object.toHTML(content);
 
-      tagName = ((position == 'before' || position == 'after')
+      tagName = ((position === 'before' || position === 'after')
         ? element.parentNode : element).tagName.toUpperCase();
 
       childNodes = Element._getContentFromAnonymousElement(tagName, content.stripScripts());
 
-      if (position == 'top' || position == 'after') childNodes.reverse();
+      if (position === 'top' || position === 'after') childNodes.reverse();
       childNodes.each(insert.curry(element));
 
       content.evalScripts.bind(content).defer();
@@ -2135,9 +2135,9 @@ Element.Methods = {
     var elements = [];
 
     while (element = element[property]) {
-      if (element.nodeType == 1)
+      if (element.nodeType === 1)
         elements.push(Element.extend(element));
-      if (elements.length == maximumLength)
+      if (elements.length === maximumLength)
         break;
     }
 
@@ -2154,7 +2154,7 @@ Element.Methods = {
 
   firstDescendant: function(element) {
     element = $(element).firstChild;
-    while (element && element.nodeType != 1) element = element.nextSibling;
+    while (element && element.nodeType !== 1) element = element.nextSibling;
     return $(element);
   },
 
@@ -2192,7 +2192,7 @@ Element.Methods = {
 
   up: function(element, expression, index) {
     element = $(element);
-    if (arguments.length == 1) return $(element.parentNode);
+    if (arguments.length === 1) return $(element.parentNode);
     var ancestors = Element.ancestors(element);
     return Object.isNumber(expression) ? ancestors[expression] :
       Prototype.Selector.find(ancestors, expression, index);
@@ -2200,7 +2200,7 @@ Element.Methods = {
 
   down: function(element, expression, index) {
     element = $(element);
-    if (arguments.length == 1) return Element.firstDescendant(element);
+    if (arguments.length === 1) return Element.firstDescendant(element);
     return Object.isNumber(expression) ? Element.descendants(element)[expression] :
       Element.select(element, expression)[index || 0];
   },
@@ -2270,7 +2270,7 @@ Element.Methods = {
     element = $(element);
     var attributes = { }, t = Element._attributeTranslations.write;
 
-    if (typeof name == 'object') attributes = name;
+    if (typeof name === 'object') attributes = name;
     else attributes[name] = Object.isUndefined(value) ? true : value;
 
     for (var attr in attributes) {
@@ -2301,7 +2301,7 @@ Element.Methods = {
   hasClassName: function(element, className) {
     if (!(element = $(element))) return;
     var elementClassName = element.className;
-    return (elementClassName.length > 0 && (elementClassName == className ||
+    return (elementClassName.length > 0 && (elementClassName === className ||
       new RegExp("(^|\\s)" + className + "(\\s|$)").test(elementClassName)));
   },
 
@@ -2330,7 +2330,7 @@ Element.Methods = {
     var node = element.firstChild;
     while (node) {
       var nextNode = node.nextSibling;
-      if (node.nodeType == 3 && !/\S/.test(node.nodeValue))
+      if (node.nodeType === 3 && !/\S/.test(node.nodeValue))
         element.removeChild(node);
       node = nextNode;
     }
@@ -2351,7 +2351,7 @@ Element.Methods = {
       return ancestor.contains(element) && ancestor !== element;
 
     while (element = element.parentNode)
-      if (element == ancestor) return true;
+      if (element === ancestor) return true;
 
     return false;
   },
@@ -2365,14 +2365,14 @@ Element.Methods = {
 
   getStyle: function(element, style) {
     element = $(element);
-    style = style == 'float' ? 'cssFloat' : style.camelize();
+    style = style === 'float' ? 'cssFloat' : style.camelize();
     var value = element.style[style];
-    if (!value || value == 'auto') {
+    if (!value || value === 'auto') {
       var css = document.defaultView.getComputedStyle(element, null);
       value = css ? css[style] : null;
     }
-    if (style == 'opacity') return value ? parseFloat(value) : 1.0;
-    return value == 'auto' ? null : value;
+    if (style === 'opacity') return value ? parseFloat(value) : 1.0;
+    return value === 'auto' ? null : value;
   },
 
   getOpacity: function(element) {
@@ -2388,9 +2388,9 @@ Element.Methods = {
         element.setOpacity(styles.match(/opacity:\s*(\d?\.?\d*)/)[1]) : element;
     }
     for (var property in styles)
-      if (property == 'opacity') element.setOpacity(styles[property]);
+      if (property === 'opacity') element.setOpacity(styles[property]);
       else
-        elementStyle[(property == 'float' || property == 'cssFloat') ?
+        elementStyle[(property === 'float' || property === 'cssFloat') ?
           (Object.isUndefined(elementStyle.styleFloat) ? 'cssFloat' : 'styleFloat') :
             property] = styles[property];
 
@@ -2399,7 +2399,7 @@ Element.Methods = {
 
   setOpacity: function(element, value) {
     element = $(element);
-    element.style.opacity = (value == 1 || value === '') ? '' :
+    element.style.opacity = (value === 1 || value === '') ? '' :
       (value < 0.00001) ? 0 : value;
     return element;
   },
@@ -2407,7 +2407,7 @@ Element.Methods = {
   makePositioned: function(element) {
     element = $(element);
     var pos = Element.getStyle(element, 'position');
-    if (pos == 'static' || !pos) {
+    if (pos === 'static' || !pos) {
       element._madePositioned = true;
       element.style.position = 'relative';
       if (Prototype.Browser.Opera) {
@@ -2443,7 +2443,7 @@ Element.Methods = {
   undoClipping: function(element) {
     element = $(element);
     if (!element._overflow) return element;
-    element.style.overflow = element._overflow == 'auto' ? '' : element._overflow;
+    element.style.overflow = element._overflow === 'auto' ? '' : element._overflow;
     element._overflow = null;
     return element;
   },
@@ -2463,12 +2463,12 @@ Element.Methods = {
 
     element = $(element);
 
-    if (Element.getStyle(element, 'position') == 'absolute') {
+    if (Element.getStyle(element, 'position') === 'absolute') {
       parent = Element.getOffsetParent(element);
       delta = Element.viewportOffset(parent);
     }
 
-    if (parent == document.body) {
+    if (parent === document.body) {
       delta[0] -= document.body.offsetLeft;
       delta[1] -= document.body.offsetTop;
     }
@@ -2538,18 +2538,18 @@ if (Prototype.Browser.Opera) {
 else if (Prototype.Browser.IE) {
   Element.Methods.getStyle = function(element, style) {
     element = $(element);
-    style = (style == 'float' || style == 'cssFloat') ? 'styleFloat' : style.camelize();
+    style = (style === 'float' || style === 'cssFloat') ? 'styleFloat' : style.camelize();
     var value = element.style[style];
     if (!value && element.currentStyle) value = element.currentStyle[style];
 
-    if (style == 'opacity') {
+    if (style === 'opacity') {
       if (value = (element.getStyle('filter') || '').match(/alpha\(opacity=(.*)\)/))
         if (value[1]) return parseFloat(value[1]) / 100;
       return 1.0;
     }
 
-    if (value == 'auto') {
-      if ((style == 'width' || style == 'height') && (element.getStyle('display') != 'none'))
+    if (value === 'auto') {
+      if ((style === 'width' || style === 'height') && (element.getStyle('display') !== 'none'))
         return element['offset' + style.capitalize()] + 'px';
       return null;
     }
@@ -2563,11 +2563,11 @@ else if (Prototype.Browser.IE) {
     element = $(element);
     var currentStyle = element.currentStyle;
     if ((currentStyle && !currentStyle.hasLayout) ||
-      (!currentStyle && element.style.zoom == 'normal'))
+      (!currentStyle && element.style.zoom === 'normal'))
         element.style.zoom = 1;
 
     var filter = element.getStyle('filter'), style = element.style;
-    if (value == 1 || value === '') {
+    if (value === 1 || value === '') {
       (filter = stripAlpha(filter)) ?
         style.filter = filter : style.removeAttribute('filter');
       return element;
@@ -2729,7 +2729,7 @@ else if (Prototype.Browser.IE) {
 
       Element.Methods.down = function(element, expression, index) {
         element = $(element);
-        if (arguments.length == 1) return element.firstDescendant();
+        if (arguments.length === 1) return element.firstDescendant();
         return Object.isNumber(expression) ? _descendants(element)[expression] :
           Element.select(element, expression)[index || 0];
       }
@@ -2741,7 +2741,7 @@ else if (Prototype.Browser.IE) {
 else if (Prototype.Browser.Gecko && /rv:1\.8\.0/.test(navigator.userAgent)) {
   Element.Methods.setOpacity = function(element, value) {
     element = $(element);
-    element.style.opacity = (value == 1) ? 0.999999 :
+    element.style.opacity = (value === 1) ? 0.999999 :
       (value === '') ? '' : (value < 0.00001) ? 0 : value;
     return element;
   };
@@ -2750,11 +2750,11 @@ else if (Prototype.Browser.Gecko && /rv:1\.8\.0/.test(navigator.userAgent)) {
 else if (Prototype.Browser.WebKit) {
   Element.Methods.setOpacity = function(element, value) {
     element = $(element);
-    element.style.opacity = (value == 1 || value === '') ? '' :
+    element.style.opacity = (value === 1 || value === '') ? '' :
       (value < 0.00001) ? 0 : value;
 
-    if (value == 1)
-      if (element.tagName.toUpperCase() == 'IMG' && element.width) {
+    if (value === 1)
+      if (element.tagName.toUpperCase() === 'IMG' && element.width) {
         element.width++; element.width--;
       } else try {
         var n = document.createTextNode(' ');
@@ -2884,7 +2884,7 @@ Object.extend(Element, Element.Methods);
 Element.extend = (function() {
 
   function checkDeficiency(tagName) {
-    if (typeof window.Element != 'undefined') {
+    if (typeof window.Element !== 'undefined') {
       var proto = window.Element.prototype;
       if (proto) {
         var id = '_' + (Math.random()+'').slice(2),
@@ -2912,7 +2912,7 @@ Element.extend = (function() {
   if (Prototype.BrowserFeatures.SpecificElementExtensions) {
     if (HTMLOBJECTELEMENT_PROTOTYPE_BUGGY) {
       return function(element) {
-        if (element && typeof element._extendedByPrototype == 'undefined') {
+        if (element && typeof element._extendedByPrototype === 'undefined') {
           var t = element.tagName;
           if (t && (/^(?:object|applet|embed)$/i.test(t))) {
             extendElementWith(element, Element.Methods);
@@ -2929,8 +2929,8 @@ Element.extend = (function() {
   var Methods = { }, ByTag = Element.Methods.ByTag;
 
   var extend = Object.extend(function(element) {
-    if (!element || typeof element._extendedByPrototype != 'undefined' ||
-        element.nodeType != 1 || element == window) return element;
+    if (!element || typeof element._extendedByPrototype !== 'undefined' ||
+        element.nodeType !== 1 || element === window) return element;
 
     var methods = Object.clone(Methods),
         tagName = element.tagName.toUpperCase();
@@ -2979,7 +2979,7 @@ Element.addMethods = function(methods) {
     });
   }
 
-  if (arguments.length == 2) {
+  if (arguments.length === 2) {
     var tagName = methods;
     methods = arguments[1];
   }
@@ -3392,7 +3392,7 @@ Element.addMethods({
       keys.each( function(key) {
         if (!Element.Layout.PROPERTIES.include(key)) return;
         var value = this.get(key);
-        if (value != null) obj[key] = value;
+        if (value !== null) obj[key] = value;
       }, this);
       return obj;
     },
@@ -3413,7 +3413,7 @@ Element.addMethods({
         if (Element.Layout.COMPOSITE_PROPERTIES.include(key)) return;
 
         var value = this.get(key);
-        if (value != null) css[cssNameFor(key)] = value + 'px';
+        if (value !== null) css[cssNameFor(key)] = value + 'px';
       }, this);
       return css;
     },
@@ -3764,13 +3764,13 @@ Element.addMethods({
     do {
       valueT += element.offsetTop  || 0;
       valueL += element.offsetLeft || 0;
-      if (element.offsetParent == docBody &&
-        Element.getStyle(element, 'position') == 'absolute') break;
+      if (element.offsetParent === docBody &&
+        Element.getStyle(element, 'position') === 'absolute') break;
     } while (element = element.offsetParent);
 
     element = forElement;
     do {
-      if (element != docBody) {
+      if (element !== docBody) {
         valueT -= element.scrollTop  || 0;
         valueL -= element.scrollLeft || 0;
       }
@@ -3863,8 +3863,8 @@ Element.addMethods({
       do {
         valueT += element.offsetTop  || 0;
         valueL += element.offsetLeft || 0;
-        if (element.offsetParent == document.body)
-          if (Element.getStyle(element, 'position') == 'absolute') break;
+        if (element.offsetParent === document.body)
+          if (Element.getStyle(element, 'position') === 'absolute') break;
 
         element = element.offsetParent;
       } while (element);
@@ -3938,7 +3938,7 @@ Prototype.Selector = (function() {
     var match = Prototype.Selector.match, length = elements.length, matchIndex = 0, i;
 
     for (i = 0; i < length; i++) {
-      if (match(elements[i], expression) && index == matchIndex++) {
+      if (match(elements[i], expression) && index === matchIndex++) {
         return Element.extend(elements[i]);
       }
     }
@@ -4053,7 +4053,7 @@ var Sizzle = function(selector, context, results, seed) {
 					pop = parts.pop();
 				}
 
-				if ( pop == null ) {
+				if ( pop === null ) {
 					pop = context;
 				}
 
@@ -4076,13 +4076,13 @@ var Sizzle = function(selector, context, results, seed) {
 		if ( !prune ) {
 			results.push.apply( results, checkSet );
 		} else if ( context && context.nodeType === 1 ) {
-			for ( var i = 0; checkSet[i] != null; i++ ) {
+			for (var i = 0; checkSet[i] !== null; i++ ) {
 				if ( checkSet[i] && (checkSet[i] === true || checkSet[i].nodeType === 1 && contains(context, checkSet[i])) ) {
 					results.push( set[i] );
 				}
 			}
 		} else {
-			for ( var i = 0; checkSet[i] != null; i++ ) {
+			for (var i = 0; checkSet[i] !== null; i++ ) {
 				if ( checkSet[i] && checkSet[i].nodeType === 1 ) {
 					results.push( set[i] );
 				}
@@ -4138,7 +4138,7 @@ Sizzle.find = function(expr, context, isXML){
 			if ( left.substr( left.length - 1 ) !== "\\" ) {
 				match[1] = (match[1] || "").replace(/\\/g, "");
 				set = Expr.find[ type ]( match, context, isXML );
-				if ( set != null ) {
+				if ( set !== null ) {
 					expr = expr.replace( Expr.match[ type ], "" );
 					break;
 				}
@@ -4159,11 +4159,11 @@ Sizzle.filter = function(expr, set, inplace, not){
 
 	while ( expr && set.length ) {
 		for ( var type in Expr.filter ) {
-			if ( (match = Expr.match[ type ].exec( expr )) != null ) {
+			if ( (match = Expr.match[ type ].exec( expr )) !== null ) {
 				var filter = Expr.filter[ type ], found, item;
 				anyFound = false;
 
-				if ( curLoop == result ) {
+				if ( curLoop === result ) {
 					result = [];
 				}
 
@@ -4178,12 +4178,12 @@ Sizzle.filter = function(expr, set, inplace, not){
 				}
 
 				if ( match ) {
-					for ( var i = 0; (item = curLoop[i]) != null; i++ ) {
+					for (var i = 0; (item = curLoop[i]) !== null; i++ ) {
 						if ( item ) {
 							found = filter( item, match, i, curLoop );
 							var pass = not ^ !!found;
 
-							if ( inplace && found != null ) {
+							if ( inplace && found !== null ) {
 								if ( pass ) {
 									anyFound = true;
 								} else {
@@ -4213,8 +4213,8 @@ Sizzle.filter = function(expr, set, inplace, not){
 			}
 		}
 
-		if ( expr == old ) {
-			if ( anyFound == null ) {
+		if ( expr === old ) {
+			if ( anyFound === null ) {
 				throw "Syntax error, unrecognized expression: " + expr;
 			} else {
 				break;
@@ -4354,7 +4354,7 @@ var Expr = Sizzle.selectors = {
 				return match;
 			}
 
-			for ( var i = 0, elem; (elem = curLoop[i]) != null; i++ ) {
+			for (var i = 0, elem; (elem = curLoop[i]) !== null; i++ ) {
 				if ( elem ) {
 					if ( not ^ (elem.className && (" " + elem.className + " ").indexOf(match) >= 0) ) {
 						if ( !inplace )
@@ -4375,9 +4375,9 @@ var Expr = Sizzle.selectors = {
 			return curLoop[i] && isXML(curLoop[i]) ? match[1] : match[1].toUpperCase();
 		},
 		CHILD: function(match){
-			if ( match[1] == "nth" ) {
+			if ( match[1] === "nth" ) {
 				var test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
-					match[2] == "even" && "2n" || match[2] == "odd" && "2n+1" ||
+					match[2] === "even" && "2n" || match[2] === "odd" && "2n+1" ||
 					!/\D/.test( match[2] ) && "0n+" + match[2] || match[2]);
 
 				match[2] = (test[1] + (test[2] || 1)) - 0;
@@ -4406,7 +4406,7 @@ var Expr = Sizzle.selectors = {
 				if ( ( chunker.exec(match[3]) || "" ).length > 1 || /^\w/.test(match[3]) ) {
 					match[3] = Sizzle(match[3], null, null, curLoop);
 				} else {
-					var ret = Sizzle.filter(match[3], curLoop, inplace, true ^ not);
+					var ret = Sizzle.filter(match[3], curLoop, inplace, !not);
 					if ( !inplace ) {
 						result.push.apply( result, ret );
 					}
@@ -4500,10 +4500,10 @@ var Expr = Sizzle.selectors = {
 			return i > match[3] - 0;
 		},
 		nth: function(elem, i, match){
-			return match[3] - 0 == i;
+			return match[3] - 0 === i;
 		},
 		eq: function(elem, i, match){
-			return match[3] - 0 == i;
+			return match[3] - 0 === i;
 		}
 	},
 	filter: {
@@ -4534,7 +4534,7 @@ var Expr = Sizzle.selectors = {
 					while ( (node = node.previousSibling) )  {
 						if ( node.nodeType === 1 ) return false;
 					}
-					if ( type == 'first') return true;
+					if ( type === 'first') return true;
 					node = elem;
 				case 'last':
 					while ( (node = node.nextSibling) )  {
@@ -4544,7 +4544,7 @@ var Expr = Sizzle.selectors = {
 				case 'nth':
 					var first = match[2], last = match[3];
 
-					if ( first == 1 && last == 0 ) {
+					if ( first === 1 && last === 0 ) {
 						return true;
 					}
 
@@ -4562,10 +4562,10 @@ var Expr = Sizzle.selectors = {
 					}
 
 					var diff = elem.nodeIndex - last;
-					if ( first == 0 ) {
-						return diff == 0;
+					if ( first === 0 ) {
+						return diff === 0;
 					} else {
-						return ( diff % first == 0 && diff / first >= 0 );
+						return ( diff % first === 0 && diff / first >= 0 );
 					}
 			}
 		},
@@ -4583,14 +4583,14 @@ var Expr = Sizzle.selectors = {
 			var name = match[1],
 				result = Expr.attrHandle[ name ] ?
 					Expr.attrHandle[ name ]( elem ) :
-					elem[ name ] != null ?
+					elem[ name ] !== null ?
 						elem[ name ] :
 						elem.getAttribute( name ),
 				value = result + "",
 				type = match[2],
 				check = match[4];
 
-			return result == null ?
+			return result === null ?
 				type === "!=" :
 				type === "=" ?
 				value === check :
@@ -4601,7 +4601,7 @@ var Expr = Sizzle.selectors = {
 				!check ?
 				value && result !== false :
 				type === "!=" ?
-				value != check :
+				value !== check :
 				type === "^=" ?
 				value.indexOf(check) === 0 :
 				type === "$=" ?
@@ -4668,13 +4668,13 @@ var sortOrder;
 if ( document.documentElement.compareDocumentPosition ) {
 	sortOrder = function( a, b ) {
 		if ( !a.compareDocumentPosition || !b.compareDocumentPosition ) {
-			if ( a == b ) {
+			if ( a === b ) {
 				hasDuplicate = true;
 			}
 			return 0;
 		}
 
-		var ret = a.compareDocumentPosition(b) & 4 ? -1 : a === b ? 0 : 1;
+		var ret = a.compareDocumentPosition(b) && 4 ? -1 : a === b ? 0 : 1;
 		if ( ret === 0 ) {
 			hasDuplicate = true;
 		}
@@ -4683,7 +4683,7 @@ if ( document.documentElement.compareDocumentPosition ) {
 } else if ( "sourceIndex" in document.documentElement ) {
 	sortOrder = function( a, b ) {
 		if ( !a.sourceIndex || !b.sourceIndex ) {
-			if ( a == b ) {
+			if ( a === b ) {
 				hasDuplicate = true;
 			}
 			return 0;
@@ -4698,7 +4698,7 @@ if ( document.documentElement.compareDocumentPosition ) {
 } else if ( document.createRange ) {
 	sortOrder = function( a, b ) {
 		if ( !a.ownerDocument || !b.ownerDocument ) {
-			if ( a == b ) {
+			if ( a === b ) {
 				hasDuplicate = true;
 			}
 			return 0;
@@ -4829,7 +4829,7 @@ if ( document.getElementsByClassName && document.documentElement.getElementsByCl
 })();
 
 function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
-	var sibDir = dir == "previousSibling" && !isXML;
+	var sibDir = dir === "previousSibling" && !isXML;
 	for ( var i = 0, l = checkSet.length; i < l; i++ ) {
 		var elem = checkSet[i];
 		if ( elem ) {
@@ -4865,7 +4865,7 @@ function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
 }
 
 function dirCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
-	var sibDir = dir == "previousSibling" && !isXML;
+	var sibDir = dir === "previousSibling" && !isXML;
 	for ( var i = 0, l = checkSet.length; i < l; i++ ) {
 		var elem = checkSet[i];
 		if ( elem ) {
@@ -4941,15 +4941,15 @@ window.Sizzle = Sizzle;
 
 })();
 
-;(function(engine) {
-  var extendElements = Prototype.Selector.extendElements;
+(function (engine) {
+    var extendElements = Prototype.Selector.extendElements;
 
   function select(selector, scope) {
     return extendElements(engine(selector, scope || document));
   }
 
   function match(element, selector) {
-    return engine.matches(selector, [element]).length == 1;
+    return engine.matches(selector, [element]).length === 1;
   }
 
   Prototype.Selector.engine = engine;
@@ -4968,7 +4968,7 @@ var Form = {
   },
 
   serializeElements: function(elements, options) {
-    if (typeof options != 'object') options = { hash: !!options };
+    if (typeof options !== 'object') options = { hash: !!options };
     else if (Object.isUndefined(options.hash)) options.hash = true;
     var key, value, submitted = false, submit = options.submit, accumulator, initial;
 
@@ -4991,8 +4991,8 @@ var Form = {
     return elements.inject(initial, function(result, element) {
       if (!element.disabled && element.name) {
         key = element.name; value = $(element).getValue();
-        if (value != null && element.type != 'file' && (element.type != 'submit' || (!submitted &&
-            submit !== false && (!submit || key == submit) && (submitted = true)))) {
+        if (value !== null && element.type !== 'file' && (element.type !== 'submit' || (!submitted &&
+            submit !== false && (!submit || key === submit) && (submitted = true)))) {
           result = accumulator(result, key, value);
         }
       }
@@ -5029,7 +5029,7 @@ Form.Methods = {
 
     for (var i = 0, matchingInputs = [], length = inputs.length; i < length; i++) {
       var input = inputs[i];
-      if ((typeName && input.type != typeName) || (name && input.name != name))
+      if ((typeName && input.type !== typeName) || (name && input.name !== name))
         continue;
       matchingInputs.push(Element.extend(input));
     }
@@ -5051,7 +5051,7 @@ Form.Methods = {
 
   findFirstElement: function(form) {
     var elements = $(form).getElements().findAll(function(element) {
-      return 'hidden' != element.type && !element.disabled;
+      return 'hidden' !== element.type && !element.disabled;
     });
     var firstByIndex = elements.findAll(function(element) {
       return element.hasAttribute('tabIndex') && element.tabIndex >= 0;
@@ -5109,7 +5109,7 @@ Form.Element.Methods = {
     element = $(element);
     if (!element.disabled && element.name) {
       var value = element.getValue();
-      if (value != undefined) {
+      if (value !== undefined) {
         var pair = { };
         pair[element.name] = value;
         return Object.toQueryString(pair);
@@ -5137,14 +5137,14 @@ Form.Element.Methods = {
   },
 
   present: function(element) {
-    return $(element).value != '';
+    return $(element).value !== '';
   },
 
   activate: function(element) {
     element = $(element);
     try {
       element.focus();
-      if (element.select && (element.tagName.toLowerCase() != 'input' ||
+      if (element.select && (element.tagName.toLowerCase() !== 'input' ||
           !(/^(?:button|reset|submit)$/i.test(element.type))))
         element.select();
     } catch (e) { }
@@ -5203,7 +5203,7 @@ Form.Element.Serializers = (function() {
       opt = element.options[i];
       currentValue = this.optionValue(opt);
       if (single) {
-        if (currentValue == value) {
+        if (currentValue === value) {
           opt.selected = true;
           return;
         }
@@ -5257,7 +5257,7 @@ Abstract.TimedObserver = Class.create(PeriodicalExecuter, {
   execute: function() {
     var value = this.getValue();
     if (Object.isString(this.lastValue) && Object.isString(value) ?
-        this.lastValue != value : String(this.lastValue) != String(value)) {
+        this.lastValue !== value : String(this.lastValue) !== String(value)) {
       this.callback(this.element, value);
       this.lastValue = value;
     }
@@ -5284,7 +5284,7 @@ Abstract.EventObserver = Class.create({
     this.callback = callback;
 
     this.lastValue = this.getValue();
-    if (this.element.tagName.toLowerCase() == 'form')
+    if (this.element.tagName.toLowerCase() === 'form')
       this.registerFormCallbacks();
     else
       this.registerCallback(this.element);
@@ -5292,7 +5292,7 @@ Abstract.EventObserver = Class.create({
 
   onElementEvent: function() {
     var value = this.getValue();
-    if (this.lastValue != value) {
+    if (this.lastValue !== value) {
       this.callback(this.element, value);
       this.lastValue = value;
     }
@@ -5380,9 +5380,9 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
 
   function _isButtonForWebKit(event, code) {
     switch (code) {
-      case 0: return event.which == 1 && !event.metaKey;
-      case 1: return event.which == 2 || (event.which == 1 && event.metaKey);
-      case 2: return event.which == 3;
+      case 0: return event.which === 1 && !event.metaKey;
+      case 1: return event.which === 2 || (event.which === 1 && event.metaKey);
+      case 2: return event.which === 3;
       default: return false;
     }
   }
@@ -5421,7 +5421,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
             node = currentTarget;
     }
 
-    if (node.nodeType == Node.TEXT_NODE)
+    if (node.nodeType === Node.TEXT_NODE)
       node = node.parentNode;
 
     return Element.extend(node);
@@ -5715,7 +5715,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
     if (Object.isUndefined(bubble))
       bubble = true;
 
-    if (element == document && document.createEvent && !element.dispatchEvent)
+    if (element === document && document.createEvent && !element.dispatchEvent)
       element = document.documentElement;
 
     var event;
@@ -5840,7 +5840,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
     document.addEventListener('DOMContentLoaded', fireContentLoadedEvent, false);
   } else {
     document.observe('readystatechange', checkReadyState);
-    if (window == top)
+    if (window === top)
       timer = pollDoScroll.defer();
   }
 
@@ -5919,10 +5919,10 @@ var Position = {
 
   overlap: function(mode, element) {
     if (!mode) return 0;
-    if (mode == 'vertical')
+    if (mode === 'vertical')
       return ((this.offset[1] + element.offsetHeight) - this.ycomp) /
         element.offsetHeight;
-    if (mode == 'horizontal')
+    if (mode === 'horizontal')
       return ((this.offset[0] + element.offsetWidth) - this.xcomp) /
         element.offsetWidth;
   },

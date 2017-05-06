@@ -7,7 +7,7 @@
     var $caching = false;
     var $file = '';
 
-    function cache()
+    function __construct()
     {
         //Constructor of the class
         

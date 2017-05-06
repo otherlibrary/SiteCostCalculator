@@ -22,7 +22,7 @@ function addEvent(element, type, handler) {
 	handlers[handler.$$guid] = handler;
 	// assign a global event handler to do all the work
 	element["on" + type] = handleEvent;
-};
+}
 // a counter used to create unique IDs
 addEvent.guid = 1;
 
@@ -31,8 +31,7 @@ function removeEvent(element, type, handler) {
 	if (element.events && element.events[type]) {
 		delete element.events[type][handler.$$guid];
 	}
-};
-
+}
 function handleEvent(event) {
 	var returnValue = true;
 	// grab the event object (IE uses a global event object)
@@ -47,14 +46,13 @@ function handleEvent(event) {
 		}
 	}
 	return returnValue;
-};
-
+}
 function fixEvent(event) {
 	// add W3C standard event methods
 	event.preventDefault = fixEvent.preventDefault;
 	event.stopPropagation = fixEvent.stopPropagation;
 	return event;
-};
+}
 fixEvent.preventDefault = function() {
 	this.returnValue = false;
 };
@@ -73,10 +71,10 @@ fixEvent.stopPropagation = function() {
  *				e.g. ul (no angle brackets)
  **/
 function createElement(element) {
-	if (typeof document.createElementNS != 'undefined') {
+	if (typeof document.createElementNS !== 'undefined') {
 		return document.createElementNS('http://www.w3.org/1999/xhtml', element);
 	}
-	if (typeof document.createElement != 'undefined') {
+	if (typeof document.createElement !== 'undefined') {
 		return document.createElement(element);
 	}
 	return false;
@@ -96,7 +94,7 @@ function getEventTarget(e) {
 	} else if (e.srcElement) {
 		targ = e.srcElement;
 	}
-	if (targ.nodeType == 3) { // defeat Safari bug
+	if (targ.nodeType === 3) { // defeat Safari bug
 		targ = targ.parentNode;
 	}
 

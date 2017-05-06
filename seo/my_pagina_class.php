@@ -84,7 +84,7 @@ class MyPagina {
 	
 	
 	// constructor
-	function MyPagina($rows = 0, $connect = true) {
+	function __construct($rows = 0, $connect = true) {
 		$this->max_rows = $rows;
 
 	}

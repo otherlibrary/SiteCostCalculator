@@ -118,7 +118,7 @@ abstract class XML_RPC2_Backend_Php_Value extends XML_RPC2_Value
      * @param mixed The native value
      * @param string The xml-rpc target encoding type, as per the xmlrpc spec (optional)
      * @throws XML_RPC2_InvalidTypeEncodeException When the native value has a type that can't be translated to XML_RPC
-     * @return A new XML_RPC2_Value instance
+     * @return A|XML_RPC2_Value
      * @see XML_RPC_Client::__call
      * @see XML_RPC_Server
      */

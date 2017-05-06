@@ -146,7 +146,7 @@ $keys_ = ($keysD) ? $keysD : $customKey;
   _gaq.push(['_trackPageLoadTime']);
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
@@ -264,7 +264,7 @@ function ScrollToElement(theElement){
   var selectedPosX = 0;
   var selectedPosY = 0;
               
-  while(theElement != null){
+  while(theElement !== null){
     selectedPosX += theElement.offsetLeft;
     selectedPosY += theElement.offsetTop;
     theElement = theElement.offsetParent;
@@ -302,7 +302,7 @@ function findCookie(szName) {
     nEndPosition = nStartPosition + szName.length;
 
     if(szCookieString.substring( 
-        nStartPosition,nEndPosition) == szName) 
+        nStartPosition,nEndPosition) === szName)
     {
       nStartPosition = nEndPosition + 1;
       nEndPosition = 
@@ -327,17 +327,17 @@ function findCookie(szName) {
 		new Ajax.Request('getIdByDomain.php?domain=' + domain, {
 		  onSuccess: function(response) {
 		      var id = response.responseText;
-		      if (id == 'bad-1') {
+		      if (id === 'bad-1') {
 			      document.getElementById('updateTw').innerHTML = "<? echo $saleUpd3; ?>";
-			      return;
+
 		      } else {
-			 if (id == 'bad-2') {
+			 if (id === 'bad-2') {
 			      window.location.href="http://<? echo $mainTitle2; ?>/www." + domain;
 			 } else {
 				new Ajax.Request('seo/sale.php?domain=' + domain, {
 				  onSuccess: function(response) {
 				      var res = response.responseText;
-				      if (res == 'good') {
+				      if (res === 'good') {
 					new Ajax.Request('saleInfo.php?domain=' + domain + '&lang=<? echo $lang; ?>', {
 					  onSuccess: function(response) {
 					      var html4 = response.responseText;
@@ -345,7 +345,7 @@ function findCookie(szName) {
 					  }
 					});
 				      }
-				      if (res == 'bad') {
+				      if (res === 'bad') {
 					document.getElementById('updateTw').innerHTML = "<? echo $saleUpd2; ?> (scc.language, scc.cost, scc.email)?";
 				      }
 				  }
@@ -856,7 +856,7 @@ function findCookie(szName) {
 		domain = domain.replace(/ /g,'');
 		domain = domain.replace("http://www.","");
 		domain = domain.replace("http://","");
-		if (domain.indexOf('www.') == 0) {
+		if (domain.indexOf('www.') === 0) {
 			domain = domain.replace("www.","");
 		}
 		document.getElementById('logo').innerHTML = "<center><b><? echo $f4; ?></b><br><img src='loader.gif'></center>";
@@ -899,7 +899,7 @@ function findCookie(szName) {
 															      if (html2.length < 3) {
 																      document.getElementById('res').innerHTML = "Nope";
 															      }
-															      document.getElementById('logo').innerHTML = '<? echo $logo; ?>'		
+															      document.getElementById('logo').innerHTML = '<? echo $logo; ?>';
 															      document.getElementById('res').innerHTML = html2;
 															      ScrollToElement(document.getElementById('gohere'));
 																new Ajax.Request('sortAllPag.php?domain=' + domain + '&lang=<? echo $lang; ?>', {
@@ -930,7 +930,7 @@ function findCookie(szName) {
 					  }
 					});
 				} else {
-						document.getElementById('logo').innerHTML = '<? echo $logo; ?>'							
+						document.getElementById('logo').innerHTML = '<? echo $logo; ?>';
 						document.getElementById('res').innerHTML = all;
 						ScrollToElement(document.getElementById('gohere'));
 						new Ajax.Request('getCountry.php?domain=' + domain, {
@@ -971,7 +971,7 @@ function go(to) {
 <center>
 <div style="width:1150px;position:relative;">
 	<div id='lastCalculated' style="width:313px;height:440px;position:absolute;top:0;left:0;">
-		<span id="lastTitle"><b><? echo $f7; ?></b></span>
+		<span id="lastTitle" style="font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold;"><strong><? echo $f7; ?></strong></span>
 	</div>	
 	<div style="width:524px;">
 <?
@@ -1007,7 +1007,7 @@ $langStrRu = "<img src=\"ru.png\" style=\"border:none;\">";
 	<div id="total"></div><br>
 	<input type="text" class="rc10" name="url" id="url"
 		   style="margin-left:10px;margin-right:10px;width: 367px; height: 25px; background-color: rgb(230, 230, 221); border: 1px solid #b4b4b4; font-family: georgia, serif; color: #2a2a2a; font-size:14pt; color: #555555; text-align: center;"
-		   onKeyPress="if (event.keyCode==13) { getAll(); }" />
+		   onKeyPress="if (event.keyCode===13) { getAll(); }" />
 		   <br><input type="button" value="<? echo $f12; ?>" style="height:25px;" onclick="getAll();"><br><br>
 <center>
 <a href="https://addons.mozilla.org/ru/firefox/addon/site-cost-calculator-tool/" target="_blank"><img src="firefox.png" class="nob" title="<? echo $ff__; ?>"></a>&nbsp;
@@ -1017,7 +1017,7 @@ $langStrRu = "<img src=\"ru.png\" style=\"border:none;\">";
 </center>
 
 	<div id="sortable" style="width:313px;height:440px;position:absolute;top:0;right:0;"><center>
-			<span id="stitle"><b><? echo $f16; ?></b></span><br>
+			<span id="stitle" style="font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold; font-weight: bold;"><strong><? echo $f16; ?></strong></span><br>
 		</center></div><br>
 </div></center>
 <br>

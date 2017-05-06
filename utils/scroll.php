@@ -6,7 +6,7 @@
 <style type="text/css">
 .carousel-component { 
 	padding:10px 16px 4px 16px;
-	margin:0px;
+	margin:0;
 }
 
 .carousel-component .carousel-list li { 

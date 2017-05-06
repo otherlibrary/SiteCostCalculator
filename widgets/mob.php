@@ -53,7 +53,7 @@ $newEn = "http://sitecostcalculator.com/mob.php?lang=en";
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
@@ -144,7 +144,7 @@ $newEn = "http://sitecostcalculator.com/mob.php?lang=en";
 function ScrollToElement(theElement){
   var selectedPosX = 0;
   var selectedPosY = 0;
-  while(theElement != null){
+  while(theElement !== null){
     selectedPosX += theElement.offsetLeft;
     selectedPosY += theElement.offsetTop;
     theElement = theElement.offsetParent;
@@ -156,7 +156,7 @@ function ScrollToElement(theElement){
 		domain = domain.replace(/ /g,'');
 		domain = domain.replace("http://www.","");
 		domain = domain.replace("http://","");
-		if (domain.indexOf('www.') == 0) {
+		if (domain.indexOf('www.') === 0) {
 			domain = domain.replace("www.","");
 		}
 		window.location.href = "http://sitecostcalculator.com/mob.php?domain=" + domain + '&lang=<? echo $lang; ?>';
@@ -196,7 +196,7 @@ function updateLinks(a){document.getElementById("googleIndexedPages").innerHTML=
 		domain = domain.replace(/ /g,'');
 		domain = domain.replace("http://www.","");
 		domain = domain.replace("http://","");
-		if (domain.indexOf('www.') == 0) {
+		if (domain.indexOf('www.') === 0) {
 			domain = domain.replace("www.","");
 		}
 		document.getElementById('logo').innerHTML = "<center><? echo $f4; ?><br><img src='loader.gif'></center>";
@@ -277,17 +277,17 @@ function updateLinks(a){document.getElementById("googleIndexedPages").innerHTML=
 		new Ajax.Request('getIdByDomain.php?domain=' + domain, {
 		  onSuccess: function(response) {
 		      var id = response.responseText;
-		      if (id == 'bad-1') {
+		      if (id === 'bad-1') {
 			      document.getElementById('updateTw').innerHTML = '<? echo $saleUpd3; ?>';
-			      return;
+
 		      } else {
-			 if (id == 'bad-2') {
+			 if (id === 'bad-2') {
 				updateNew(domain);
 			 } else {
 				new Ajax.Request('seo/sale.php?domain=' + domain, {
 				  onSuccess: function(response) {
 				      var res = response.responseText;
-				      if (res == 'good') {
+				      if (res === 'good') {
 					new Ajax.Request('saleInfo.php?domain=' + domain + '&lang=<? echo $lang; ?>', {
 					  onSuccess: function(response) {
 					      var html4 = response.responseText;
@@ -295,7 +295,7 @@ function updateLinks(a){document.getElementById("googleIndexedPages").innerHTML=
 					  }
 					});
 				      }
-				      if (res == 'bad') {
+				      if (res === 'bad') {
 					document.getElementById('updateTw').innerHTML = "<? echo $saleUpd2; ?>";
 				      }
 				  }
